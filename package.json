@@ -1,5 +1,5 @@
 {
-  "name": "eclesius",
+  "name": "exivinho",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "start": "react-scripts start",
     "preview": "vite preview",
     "tailwind:init": "tailwindcss init -p",
     "tailwind:build": "tailwindcss -i ./src/input.css -o ./dist/output.css",
@@ -15,12 +16,14 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.2"
+    "react-router-dom": "^7.6.2",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.2",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.4.1",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -28,5 +31,17 @@
     "globals": "^16.0.0",
     "tailwindcss": "^3.4.17",
     "vite": "^6.3.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
