@@ -15,10 +15,7 @@ const Header = ({ children }) => {
     <header className="h-[70px] w-full border-b border-[#D291BC] bg-[#1A1A2E] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between px-6">
       <div className='max-w-screen-lg flex items-center justify-between w-full m-auto'>
         <div className="flex items-center gap-4">
-          <select className="bg-[#22223B] text-white border-none rounded px-2 py-1">
-            <option>Hunt</option>
-            <option>Boss</option>
-          </select>
+
           <span className="text-[#D291BC] font-bold text-xl">Exivinho</span>
         </div>
 

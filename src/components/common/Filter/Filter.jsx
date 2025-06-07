@@ -11,6 +11,12 @@ const voc = [
     "Monk"
 ];
 
+const type = [
+    "Hunt",
+    "Boss",
+    "Acessos"
+];
+
 
 const Filter = () => {
     const [mundos, setMundos] = useState([]);
@@ -37,7 +43,14 @@ const Filter = () => {
 
             </div>
 
-            <div className='bg-[#E0BBE4]'>
+            <div className='bg-[#E0BBE4] flex flex-row'>
+                <Autocomplete
+                    options={type}
+                    renderInput={(params) => <TextField {...params} label="Escolha o tipo:" />}
+                    freeSolo
+                    className=''
+                />
+
                 <Autocomplete
                     options={mundos}
                     renderInput={(params) => <TextField {...params} label="Escolha um mundo:" />}
@@ -58,7 +71,6 @@ const Filter = () => {
                     inputProps={{ min: 1 }}
                     variant="outlined"
                     fullWidth
-                    margin="normal"
                 />
             </div>
         </div>
