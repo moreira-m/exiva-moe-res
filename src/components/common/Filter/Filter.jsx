@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 
 const voc = [
     "Druid",
@@ -43,34 +41,27 @@ const Filter = () => {
 
             </div>
 
-            <div className='bg-[#E0BBE4] flex flex-row'>
-                <Autocomplete
-                    options={type}
-                    renderInput={(params) => <TextField {...params} label="Escolha o tipo:" />}
-                    freeSolo
-                    className=''
-                />
+            <div className="bg-[#E0BBE4] flex flex-row gap-4 justify-center p-4">
+                <select className="w-[170px] h-[32px] rounded border-gray-300" defaultValue="">
+                    <option value="" disabled>Escolha o tipo:</option>
+                    {type.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
 
-                <Autocomplete
-                    options={mundos}
-                    renderInput={(params) => <TextField {...params} label="Escolha um mundo:" />}
-                    freeSolo
-                    className=''
-                />
+                <select className="w-[170px] h-[32px] rounded border-gray-300" defaultValue="">
+                    <option value="" disabled>Escolha um mundo:</option>
+                    {mundos.map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
 
-                <Autocomplete
-                    options={voc}
-                    renderInput={(params) => <TextField {...params} label="Escolha uma vocação: " />}
-                    freeSolo
-                    className=''
-                />
+                <select className="w-[170px] h-[32px] rounded border-gray-300" defaultValue="">
+                    <option value="" disabled>Escolha uma vocação:</option>
+                    {voc.map(v => <option key={v} value={v}>{v}</option>)}
+                </select>
 
-                <TextField
-                    label="Level"
+                <input
                     type="number"
-                    inputProps={{ min: 1 }}
-                    variant="outlined"
-                    fullWidth
+                    min={1}
+                    placeholder="Level"
+                    className="w-[170px] h-[32px] rounded border-gray-300 px-2"
                 />
             </div>
         </div>
