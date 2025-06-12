@@ -41,7 +41,7 @@ const Filter = () => {
 
             </div>
 
-            <div className="bg-[#E0BBE4] flex flex-row gap-4 justify-center p-4">
+            <div className="bg-[#453745] flex flex-row gap-4 justify-center p-4">
                 <select className="w-[170px] h-[32px] rounded border-gray-300" defaultValue="">
                     <option value="" disabled>Escolha o tipo:</option>
                     {type.map(t => <option key={t} value={t}>{t}</option>)}

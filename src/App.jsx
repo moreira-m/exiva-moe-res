@@ -10,7 +10,11 @@ function App() {
     <>
     <Header />
     <Filter />
-    <Card />
+    <div className='flex flex-row gap-12 m-auto justify-center'>
+      <Card />
+      <Card />
+      <Card />
+    </div>
     <Footer />
     </>
   )

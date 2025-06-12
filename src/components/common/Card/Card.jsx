@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = () => {
     return (
-        <div className='bg-[#957DAD] w-[347px] h-auto flex-shrink-0 rounded-lg gap-4 flex flex-col p-4'>
+        <div className='bg-[#453745] w-[347px] h-auto flex-shrink-0 rounded-lg gap-4 flex flex-col p-4'>
             <div className='flex flex-row justify-between'>
                 <p>
                     Soulcore
@@ -13,7 +13,7 @@ const Card = () => {
             </div>
 
             <div className='flex flex-row justify-between gap-2'>
-                <div className='w-[97px] h-[97px] flex-shrink-0 rounded-[8px] bg-[#E0BBE4] m-auto mx-0'>
+                <div className='w-[97px] h-[97px] flex-shrink-0 rounded-[8px] bg-[#BF6370] m-auto mx-0'>
                     <img></img>
                 </div>
                 <div className='grid grid-flow-col grid-rows-2 gap-4'>
