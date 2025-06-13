@@ -2,17 +2,21 @@ import React from 'react';
 
 const Card = () => {
     return (
-        <div className='bg-[#453745] w-[347px] h-auto flex-shrink-0 rounded-lg gap-4 flex flex-row p-4 transform hover:scale-105 transition-all duration-500'>
-            <div className='flex flex-col justify-between'>
-                <div className='w-[97px] h-[97px] flex-shrink-0 rounded-[8px] bg-[#BF6370] m-auto mx-0'>
+        <div className='bg-[#453745] w-[fit] h-auto flex-shrink-0 rounded-lg gap-4 flex flex-row p-8 transform hover:scale-105 transition-all duration-500'>
+            <div className='flex flex-col justify-between gap-4'>
+                <div className='w-[130px] h-[130px] flex-shrink-0 rounded-[8px] bg-[#BF6370] m-auto mx-0'>
                     <img></img>
                 </div>
-                <p>Valor: </p>
+                <div className='flex flex-row gap-2'>
+                    <img src=''></img>
+                    <p className='text-white'>500k </p>
+                </div>
+
             </div>
 
-            <div>
+            <div className='flex flex-col gap-8'>
                 <div className='flex flex-col justify-between gap-2'>
-                    <h2>
+                    <h2 className='text-left'>
                         Icecold Book
                     </h2>
                     <div className='grid grid-flow-col grid-rows-2 gap-4'>
@@ -33,12 +37,12 @@ const Card = () => {
                         </p>
                     </div>
                 </div>
-                <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090]'>
+                <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] ml-auto'>
                     Apply
                 </button>
             </div>
 
-        </div>
+        </div >
     );
 };
 

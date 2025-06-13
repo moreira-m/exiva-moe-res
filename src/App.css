@@ -44,3 +44,15 @@
 .read-the-docs {
   color: #888;
 }
+
+p, h1, h2, h3 {
+  color: #fff;
+}
+
+h1 {
+
+}
+
+h2 {
+  font-size: 28px;
+}

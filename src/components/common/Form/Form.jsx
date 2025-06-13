@@ -55,7 +55,7 @@ const Form = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 bg-gray-700 text-white rounded-md max-w-lg mx-auto">
+        <form onSubmit={handleSubmit} className="p-4 bg-[#BF6370] text-white rounded-md max-w-lg mx-auto">
             <h2 className="text-2xl mb-4">Criar um Time</h2>
 
             <div className="mb-4">
@@ -85,13 +85,13 @@ const Form = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Ex.: 500k ou Grátis"
-                    className="w-full p-2 rounded text-black"
+                    className="w-full p-2 rounded text-black bg-transparent"
                 />
             </div>
 
             <button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 p-2 rounded"
+                className="w-full bg-[#A8C090] hover:bg-green-600 p-2 rounded"
             >
                 Criar Anúncio
             </button>
