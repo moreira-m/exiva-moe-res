@@ -4,6 +4,7 @@ import Filter from "./components/common/Filter/Filter"
 import Card from "./components/common/Card/Card"
 import Footer from "./components/common/Footer/Footer"
 import Form from './components/common/Form/Form'
+import AdDashboard from './components/common/AdDashboard/AdDashboard'
 
 function App() {
 
@@ -11,9 +12,10 @@ function App() {
     <>
       <Header />
       <Filter />
+      <AdDashboard />
 
       { /* Preciso criar uma lógica pra criar os cards e ajustar posicionamento */}
-      <div className='flex flex-row gap-12 m-auto justify-center mt-12'>
+      {/* <div className='flex flex-row gap-12 m-auto justify-center mt-12'>
         <Card />
         <Card />
         <Card />
@@ -27,9 +29,7 @@ function App() {
         <Card />
         <Card />
         <Card />
-      </div>
-
-      <Form />
+      </div> */}
       <Footer />
     </>
   )
