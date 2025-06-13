@@ -3,6 +3,7 @@ import Header from "./components/common/Header/Header"
 import Filter from "./components/common/Filter/Filter"
 import Card from "./components/common/Card/Card"
 import Footer from "./components/common/Footer/Footer"
+import Form from './components/common/Form/Form'
 
 function App() {
 
@@ -27,6 +28,8 @@ function App() {
         <Card />
         <Card />
       </div>
+
+      <Form />
       <Footer />
     </>
   )
