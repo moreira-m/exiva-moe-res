@@ -1,4 +1,5 @@
 import React from 'react';
+import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 
 const Card = () => {
     return (
@@ -8,8 +9,8 @@ const Card = () => {
                     <img></img>
                 </div>
                 <div className='flex flex-row gap-2'>
-                    <img src=''></img>
-                    <p className='text-white'>500k </p>
+                    <img src={crystalCoinIcon}></img>
+                    <p className='text-white mt-auto mb-auto'>500k </p>
                 </div>
 
             </div>
