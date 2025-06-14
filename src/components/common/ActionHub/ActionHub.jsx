@@ -94,7 +94,7 @@ const ActionHub = ({ onCreateAd }) => {
                 )}
 
                 {activeMode === 'create' && (
-                    <div className="bg-transparent pt-4 rounded-b-lg">
+                    <div className="bg-transparent rounded-b-lg">
                         <Form onCreateAd={onCreateAd} />
                     </div>
                 )}

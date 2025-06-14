@@ -61,40 +61,39 @@ const Form = ({ onCreateAd }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4 bg-[#BF6370] text-white rounded-md max-w-lg mx-auto">
-             <h2 className="text-2xl mb-4">Criar um Time</h2>
-             <div className="mb-4">
-                 <label htmlFor="soul-core-select" className="block mb-1">
-                     Nome do Boss
-                 </label>
+        <form onSubmit={handleSubmit} className="bg-[#453745] text-white bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center p-4">
+             <div className="mb-4 w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+                 {/* <label htmlFor="soul-core-select" className="block mb-1">
+                     Soulcore
+                 </label> */}
                  <Select
                      id="soul-core-select"
                      options={creatures}
                      onChange={setSoulCore}
                      value={soulCore}
-                     placeholder="Digite aqui o nome do boss"
+                     placeholder="Ex: Demon"
                      isClearable
                      isLoading={creatures.length === 0}
                      styles={customStyles}
                      noOptionsMessage={() => "Nenhuma criatura encontrada"}
                  />
              </div>
-             <div className="mb-4">
-                 <label htmlFor="value-input" className="block mb-1">
+             <div className="mb-4 w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+                 {/* <label htmlFor="value-input" className="block mb-1">
                      Valor pela vaga
-                 </label>
+                 </label> */}
                  <input
                      type="text"
                      id="value-input"
                      value={inputValue}
                      onChange={(e) => setInputValue(e.target.value)}
-                     placeholder="Ex.: 500k ou Grátis"
+                     placeholder="Ex: 500k"
                      className="w-full p-2 rounded text-black"
                  />
              </div>
              <button
                  type="submit"
-                 className="w-full bg-[#A8C090] hover:bg-green-600 p-2 rounded"
+                 className="h-[38px] px-4 rounded bg-[#A8C090] font-bold"
              >
                  Criar Anúncio
              </button>

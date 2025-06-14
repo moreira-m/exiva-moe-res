@@ -33,7 +33,7 @@ const AdDashboard = () => {
 
     return (
         <div className="">
-            
+
             <ActionHub
                 onCreateAd={handleCreateAd}
                 onFilterChange={handleFilterChange}

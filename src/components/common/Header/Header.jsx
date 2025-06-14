@@ -16,7 +16,7 @@ const Header = ({ children }) => {
       <div className='max-w-screen-lg flex items-center justify-between w-full m-auto'>
         <div className="flex items-center gap-4">
 
-          <span className="text-[#613C4C] font-bold text-xl">Exiva Moe Res</span>
+          <span className="text-[#FFF] font-bold text-xl">Exiva Moe Res</span>
         </div>
 
 
