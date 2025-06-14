@@ -30,15 +30,15 @@ const AdDashboard = () => {
         .filter(ad => (new Date().getTime() - ad.createdAt) < oneDayInMilliseconds)
         .filter(ad => filters.boss ? ad.soulCoreName === filters.boss : true)
         .filter(ad => filters.world ? ad.world === filters.world : true);
-    
+
     return (
-        <div className="p-8">
-            <h1 className="text-4xl font-bold text-center text-white mb-8">Soulcore</h1>
+        <div className="">
             
-            <ActionHub 
-                onCreateAd={handleCreateAd} 
-                onFilterChange={handleFilterChange} 
+            <ActionHub
+                onCreateAd={handleCreateAd}
+                onFilterChange={handleFilterChange}
             />
+            <h1 className="text-4xl font-bold text-center text-white mb-8">Soulcore</h1>
 
             <div className="mt-12 flex flex-wrap gap-6 justify-center">
                 {activeAds.map(ad => (
