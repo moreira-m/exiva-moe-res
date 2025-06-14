@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Form from './../Form/Form'; 
-import Card from './../Card/Card'; 
+import ActionHub from '../ActionHub/ActionHub';
+import Card from '../Card/Card';
 
 const AdDashboard = () => {
     const [ads, setAds] = useState([]);
+    const [filters, setFilters] = useState({ boss: '', world: '' });
 
     useEffect(() => {
         const savedAds = localStorage.getItem('bossAds');
@@ -20,16 +21,24 @@ const AdDashboard = () => {
         setAds(prevAds => [newAd, ...prevAds]);
     };
 
-    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-    const activeAds = ads.filter(ad => {
-        return (new Date().getTime() - ad.createdAt) < oneDayInMilliseconds;
-    });
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
 
+    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+    const activeAds = ads
+        .filter(ad => (new Date().getTime() - ad.createdAt) < oneDayInMilliseconds)
+        .filter(ad => filters.boss ? ad.soulCoreName === filters.boss : true)
+        .filter(ad => filters.world ? ad.world === filters.world : true);
+    
     return (
         <div className="p-8">
-            <h1 className="text-4xl font-bold text-center text-white mb-8">Anúncios de Bosses</h1>
+            <h1 className="text-4xl font-bold text-center text-white mb-8">Soulcore</h1>
             
-            <Form onCreateAd={handleCreateAd} />
+            <ActionHub 
+                onCreateAd={handleCreateAd} 
+                onFilterChange={handleFilterChange} 
+            />
 
             <div className="mt-12 flex flex-wrap gap-6 justify-center">
                 {activeAds.map(ad => (
