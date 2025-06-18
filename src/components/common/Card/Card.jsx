@@ -15,19 +15,22 @@ const Card = ({ adData }) => {
             </div>
 
             <div className='flex flex-col gap-8'>
-                <div className='flex flex-col justify-between gap-2'>
-                    <h2 className='text-left text-white font-bold text-xl'>
+                <div className='flex flex-col justify-between gap-6'>
+                    <h2 className='text-left text-white font-bold text-xl text-[30px]'>
                         {adData.soulCoreName}
                     </h2>
-                    <div className='grid grid-flow-col grid-rows-2 gap-x-4 gap-y-2 text-white'>
+                    <div className='grid grid-flow-col grid-rows-2 gap-6 gap-y-2 text-white'>
                         {adData.roles.map((role) => (
-                            <p key={role.name}>
+                            <p 
+                                key={role.name}
+                                className='text-left'
+                            >
                                 {role.name}: {role.current}/{role.total}
                             </p>
                         ))}
                     </div>
                 </div>
-                <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] ml-auto font-bold'>
+                <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] ml-auto font-bold mt-auto text-white'>
                     Apply
                 </button>
             </div>

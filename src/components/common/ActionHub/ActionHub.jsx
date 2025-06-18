@@ -87,7 +87,7 @@ const ActionHub = ({ onCreateAd }) => {
                             isClearable
                             styles={{ option: (p) => ({ ...p, color: 'black' }) }}
                         />
-                        <button className="h-[38px] px-4 rounded bg-[#A8C090] font-bold">
+                        <button className="h-[38px] px-4 rounded bg-[#A8C090] font-bold text-white">
                             Buscar
                         </button>
                     </div>

@@ -62,7 +62,7 @@ const Form = ({ onCreateAd }) => {
 
     return (
         <form onSubmit={handleSubmit} className="bg-[#453745] text-white bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center p-4">
-             <div className="mb-4 w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+             <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
                  {/* <label htmlFor="soul-core-select" className="block mb-1">
                      Soulcore
                  </label> */}
@@ -78,7 +78,7 @@ const Form = ({ onCreateAd }) => {
                      noOptionsMessage={() => "Nenhuma criatura encontrada"}
                  />
              </div>
-             <div className="mb-4 w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+             <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
                  {/* <label htmlFor="value-input" className="block mb-1">
                      Valor pela vaga
                  </label> */}

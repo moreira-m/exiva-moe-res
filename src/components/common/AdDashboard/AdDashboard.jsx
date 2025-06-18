@@ -38,7 +38,7 @@ const AdDashboard = () => {
                 onCreateAd={handleCreateAd}
                 onFilterChange={handleFilterChange}
             />
-            <h1 className="text-4xl font-bold text-center text-white mb-8">Soulcore</h1>
+            <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">Soulcore</h1>
 
             <div className="mt-12 flex flex-wrap gap-6 justify-center">
                 {activeAds.map(ad => (
