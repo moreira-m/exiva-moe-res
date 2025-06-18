@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import LoginPopup from './LoginPopup';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Login', path: '/login' },
 ];
 
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const location = useLocation();
+
+  const handleLoginClick = () => {
+    setShowLoginPopup(true);
+    setMenuOpen(false);
+  };
 
   return (
     <header className="h-[70px] w-full border-b border-[#613C4C] bg-[#2B2C30] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between px-6">
       <div className='max-w-screen-lg flex items-center justify-between w-full m-auto'>
         <div className="flex items-center gap-4">
-
-          <span className="text-[#FFF] font-bold text-xl">Exiva Moe Res</span>
+          <Link to="/" className="text-[#FFF] font-bold text-xl hover:text-[#613C4C] transition">
+            Exiva Moe Res
+          </Link>
         </div>
 
 
@@ -30,9 +36,14 @@ const Header = ({ children }) => {
               {link.name}
             </Link>
           ))}
+          <button
+            onClick={handleLoginClick}
+            className="text-white hover:text-[#613C4C] transition bg-[#BF6370] px-4 py-2 rounded"
+          >
+            Login
+          </button>
           {children}
         </nav>
-
 
         <button
           className="md:hidden text-[#613C4C] focus:outline-none"
@@ -58,11 +69,20 @@ const Header = ({ children }) => {
                 {link.name}
               </Link>
             ))}
+            <button
+              onClick={handleLoginClick}
+              className="text-white hover:text-[#613C4C] text-lg"
+            >
+              Login
+            </button>
             {children}
           </div>
         )}
       </div>
 
+      {showLoginPopup && (
+        <LoginPopup onClose={() => setShowLoginPopup(false)} />
+      )}
     </header>
   );
 };
