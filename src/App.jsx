@@ -5,6 +5,7 @@ import Card from "./components/common/Card/Card"
 import Footer from "./components/common/Footer/Footer"
 import Form from './components/common/Form/Form'
 import AdDashboard from './components/common/AdDashboard/AdDashboard'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
 
@@ -12,23 +13,6 @@ function App() {
     <>
       <Header />
       <AdDashboard />
-
-      { /* Preciso criar uma lógica pra criar os cards e ajustar posicionamento */}
-      {/* <div className='flex flex-row gap-12 m-auto justify-center mt-12'>
-        <Card />
-        <Card />
-        <Card />
-      </div>
-      <div className='flex flex-row gap-12 m-auto justify-center mt-12'>
-        <Card />
-        <Card />
-        <Card />
-      </div>
-      <div className='flex flex-row gap-12 m-auto justify-center mt-12'>
-        <Card />
-        <Card />
-        <Card />
-      </div> */}
       <Footer />
     </>
   )
