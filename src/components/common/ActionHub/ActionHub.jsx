@@ -86,7 +86,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
                             isClearable
                             styles={{ option: (p) => ({ ...p, color: 'black' }) }}
                         />
-                        <button 
+                        <button
                             className="h-[38px] px-4 rounded bg-[#A8C090] font-bold text-white"
                             onClick={() => {
                                 onFilterChange({

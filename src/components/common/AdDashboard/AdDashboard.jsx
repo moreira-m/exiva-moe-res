@@ -39,7 +39,7 @@ const AdDashboard = () => {
             />
             <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">Soulcore</h1>
 
-            <div className="mt-12 flex flex-wrap gap-6 justify-center">
+            <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-center">
                 {activeAds.map(ad => (
                     <Card key={ad.id} adData={ad} />
                 ))}
