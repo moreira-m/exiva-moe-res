@@ -39,26 +39,26 @@ const LoginPopup = ({ onClose }) => {
                 <h2 className="text-2xl font-semibold mb-4 text-center text-[#2B2C30]">Login</h2>
 
                 <div className="text-center flex flex-col gap-4">
-                    <div className='flex flex-row border rounded justify-center p-2'>
+                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-gray-100 transition'>
                         <img
                             src={googleIcon}
                             className='w-[33px] h-[33px]'
                         />
                         <button
                             onClick={handleGoogleLogin}
-                            className="px-4 py-2 rounded text-sm hover:bg-gray-100 transition"
+                            className="px-4 py-2 rounded text-sm "
                         >
                             Entrar com Google
                         </button>
                     </div>
-                    <div className='flex flex-row border rounded justify-center p-2'>
+                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-gray-100 transition'>
                         <img
                             src={facebookIcon}
                             className='w-[33x] h-[33px]'
                         />
                         <button
                             onClick={handleFacebookLogin}
-                            className='px-4 py-2 rounded text-sm hover:bg-gray-100 transition'
+                            className='px-4 py-2 rounded text-sm '
                         >
                             Entrar com Facebook
                         </button>
