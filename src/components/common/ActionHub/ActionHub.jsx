@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import Form from '../Form/Form';
 
-const ActionHub = ({ onCreateAd }) => {
+const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [activeMode, setActiveMode] = useState('filter');
     const [mundos, setMundos] = useState([]);
     const [creatures, setCreatures] = useState([]);
@@ -86,7 +86,15 @@ const ActionHub = ({ onCreateAd }) => {
                             isClearable
                             styles={{ option: (p) => ({ ...p, color: 'black' }) }}
                         />
-                        <button className="h-[38px] px-4 rounded bg-[#A8C090] font-bold text-white">
+                        <button 
+                            className="h-[38px] px-4 rounded bg-[#A8C090] font-bold text-white"
+                            onClick={() => {
+                                onFilterChange({
+                                    boss: selectedBoss?.label || '',
+                                    world: selectedWorld
+                                });
+                            }}
+                        >
                             Buscar
                         </button>
                     </div>

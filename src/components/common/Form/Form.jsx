@@ -45,6 +45,11 @@ const Form = ({ onCreateAd }) => {
             return;
         }
 
+        if (!world) {
+            alert("Selecione um mundo!")
+            return;
+        }
+
         const newAd = {
             id: new Date().getTime(),
             createdAt: new Date().getTime(),
