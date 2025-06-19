@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import ActionHub from '../ActionHub/ActionHub';
 import Card from '../Card/Card';
+import Form from '../Form/Form';
 import { getAds } from '../../../firebase/firestoreService';
 
 const AdDashboard = () => {
     const [ads, setAds] = useState([]);
     const [filters, setFilters] = useState({ boss: '', world: '' });
+    const [showCreateForm, setShowCreateForm] = useState(false);
 
     useEffect(() => {
-        async function fetchAds () {
+        async function fetchAds() {
             const allAds = await getAds();
-            setAds(allAds);            
+            setAds(allAds);
         }
         fetchAds();
     }, []);
 
-
     const handleCreateAd = (newAd) => {
         setAds(prevAds => [newAd, ...prevAds]);
+        setShowCreateForm(false);
+        setFilters({ boss: '', world: newAd.world });
     };
 
     const handleFilterChange = (newFilters) => {
@@ -30,15 +33,32 @@ const AdDashboard = () => {
         .filter(ad => filters.boss ? ad.soulCoreName === filters.boss : true)
         .filter(ad => filters.world ? ad.world === filters.world : true);
 
+    const title = filters.world
+        ? `Soulcores em ${filters.world}`
+        : 'Soulcore';
+
     return (
-        <div className="">
-
+        <div>
             <ActionHub
-                onCreateAd={handleCreateAd}
                 onFilterChange={handleFilterChange}
+                showCreateForm={showCreateForm}
+                setShowCreateForm={(v) => {
+                    setShowCreateForm(v);
+                    if (v) setFilters({ boss: '', world: '' });
+                }}
             />
-            <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">Soulcore</h1>
 
+            <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">
+                {title}
+            </h1>
+
+            {showCreateForm && (
+                <Form
+                    onCreateAd={handleCreateAd}
+                    onWorldSelect={(world) => handleFilterChange({ boss: '', world })}
+                />
+
+            )}
             <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-center">
                 {activeAds.map(ad => (
                     <Card key={ad.id} adData={ad} />

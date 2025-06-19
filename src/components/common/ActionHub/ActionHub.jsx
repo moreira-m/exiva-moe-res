@@ -45,6 +45,32 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
         fetchCreatures();
     }, []);
 
+    useEffect(() => {
+        if (activeMode === 'filter') {
+            onFilterChange({
+                boss: selectedBoss?.label || '',
+                world: selectedWorld
+            });
+        }
+    }, [selectedWorld, selectedBoss, activeMode]);
+
+    const toggleMode = (mode) => {
+        setActiveMode(mode);
+        if (mode === 'create') {
+            setSelectedBoss(null);
+            setSelectedWorld('');
+            onFilterChange({ boss: '', world: '' });
+        }
+    };
+
+    const handleCreateAd = (newAd) => {
+        onCreateAd(newAd);
+        setActiveMode('filter');
+        setSelectedWorld(newAd.world);
+        setSelectedBoss(null);
+        onFilterChange({ boss: '', world: newAd.world });
+    };
+
     const baseStyle = "py-2 px-6 font-bold transition-all duration-300";
     const activeStyle = "bg-[#BF6370] text-white rounded-md";
     const inactiveStyle = "bg-transparent text-gray-400";
@@ -53,13 +79,13 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
         <div className="w-full">
             <div className="bg-[#453745] p-2 rounded-lg flex justify-center gap-2">
                 <button
-                    onClick={() => setActiveMode('filter')}
+                    onClick={() => toggleMode('filter')}
                     className={`${baseStyle} ${activeMode === 'filter' ? activeStyle : inactiveStyle}`}
                 >
                     Filtrar
                 </button>
                 <button
-                    onClick={() => setActiveMode('create')}
+                    onClick={() => toggleMode('create')}
                     className={`${baseStyle} ${activeMode === 'create' ? activeStyle : inactiveStyle}`}
                 >
                     Anunciar Vaga
@@ -86,28 +112,18 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
                             isClearable
                             styles={{ option: (p) => ({ ...p, color: 'black' }) }}
                         />
-                        <button
-                            className="h-[38px] px-4 rounded bg-[#A8C090] font-bold text-white"
-                            onClick={() => {
-                                onFilterChange({
-                                    boss: selectedBoss?.label || '',
-                                    world: selectedWorld
-                                });
-                            }}
-                        >
-                            Buscar
-                        </button>
                     </div>
                 )}
 
                 {activeMode === 'create' && (
                     <div className="bg-transparent rounded-b-lg">
-                        <Form onCreateAd={onCreateAd} />
+                        <Form onCreateAd={handleCreateAd} onWorldSelect={(world) => onFilterChange({ boss: '', world })} />
                     </div>
                 )}
             </div>
         </div>
     );
 };
+
 
 export default ActionHub;

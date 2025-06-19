@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { createAd } from '../../../firebase/firestoreService';
 
-const Form = ({ onCreateAd }) => {
+const Form = ({ onCreateAd, onWorldSelect }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
     const [inputValue, setInputValue] = useState('');
@@ -79,7 +79,11 @@ const Form = ({ onCreateAd }) => {
                 <select
                     className="w-[180px] h-[38px] rounded text-black"
                     value={world}
-                    onChange={(e) => setWorld(e.target.value)}
+                    onChange={(e) => {
+                        const selected = e.target.value;
+                        setWorld(selected);
+                        onWorldSelect && onWorldSelect(selected);
+                    }}
                 >
                     <option value="">Selecione o mundo</option>
                     {worlds.map(w => (
