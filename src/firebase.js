@@ -2,12 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_PROJECT_ID.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SUA_APP_ID"
+  apiKey: "AIzaSyD2jVbZrdx1C7svJ6FksiJ082UmLSXaeNQ",
+  authDomain: "exiva-moe-res.firebaseapp.com",
+  projectId: "exiva-moe-res",
+  storageBucket: "exiva-moe-res.firebasestorage.app",
+  messagingSenderId: "95259758584",
+  appId: "1:95259758584:web:e20e7a3f7fedf9d721500d",
+  measurementId: "G-XYK27376P9"
 };
 
 const app = initializeApp(firebaseConfig);
