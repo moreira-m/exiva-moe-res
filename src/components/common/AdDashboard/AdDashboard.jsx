@@ -18,9 +18,9 @@ const AdDashboard = () => {
     }, []);
 
     const handleCreateAd = (newAd) => {
+        setFilters({ boss: '', world: newAd.world });
         setAds(prevAds => [newAd, ...prevAds]);
         setShowCreateForm(false);
-        setFilters({ boss: '', world: newAd.world });
     };
 
     const handleFilterChange = (newFilters) => {
@@ -59,7 +59,7 @@ const AdDashboard = () => {
                 />
 
             )}
-            <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-center">
+            <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-center min-h-screen content-start">
                 {activeAds.map(ad => (
                     <Card key={ad.id} adData={ad} />
                 ))}

@@ -40,8 +40,8 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!soulCore) return alert('Insira um SoulCore!');
-        if (!world) return alert('Selecione um mundo!');
+        if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
+        if (!world) return alert('Selecione um mundo!'); // mudar alerta
 
         const base = import.meta.env.BASE_URL;
 
