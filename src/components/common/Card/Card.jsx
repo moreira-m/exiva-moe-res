@@ -50,7 +50,7 @@ const Card = ({ adData }) => {
                         {adData.roles.map((role, idx) => (
                             <img
                                 key={idx}
-                                src={role.icon ?? roleIcons[role.name]}   // ← fallback
+                                src={role.icon ?? roleIcons[role.name]}
                                 alt=""
                                 className="w-[45px] h-[45px]"
                             />

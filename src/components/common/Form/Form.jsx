@@ -53,29 +53,14 @@ const Form = ({ onCreateAd }) => {
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
             world,
-            // roles: [
-            //     { name: "Sorcerer", current: 1, total: 1 },
-            //     { name: "Druid", current: 0, total: 1 },
-            //     { name: "Knight", current: 0, total: 1 },
-            //     { name: "Paladin", current: 0, total: 1 },
-            //     { name: "Monk", current: 0, total: 1 },
-            // ]
             roles: [
                 { icon: `${base}roles/sorcerer-icon.gif`, current: 1, total: 1 },
-                { icon: `${base}roles/druid-outfit.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/knight-outfit.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/hunt-outfit.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/monk-outfit.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/druid-icon.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/knight-icon.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/paladin-icon.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/monk-icon.gif`, current: 0, total: 1 },
             ],
         };
-
-        // const roleIcons = {
-        //     Sorcerer: sorcererIcon,
-        //     Druid: druidIcon,
-        //     Knight: knightIcon,
-        //     Paladin: paladinIcon,
-        //     Monk: monkIcon
-        // };
 
         await createAd(newAd);
         onCreateAd(newAd);
