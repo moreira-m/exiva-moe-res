@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { createAd } from '../../../firebase/firestoreService';
 
 const Form = ({ onCreateAd }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
     const [inputValue, setInputValue] = useState('');
+    const [world, setWorld] = useState('');
+    const [worlds, setWorlds] = useState([]);
 
     useEffect(() => {
         async function fetchCreatures() {
@@ -23,11 +26,19 @@ const Form = ({ onCreateAd }) => {
                 console.error('Erro ao buscar criaturas:', error);
             }
         }
+
+        async function fetchWorlds() {
+            const response = await fetch('https://api.tibiadata.com/v4/worlds');
+            const data = await response.json();
+            setWorlds(data.worlds.regular_worlds.map((w) => w.name));
+        }
+
+        fetchWorlds();
         fetchCreatures();
     }, []);
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (!soulCore) {
             alert("Insira um SoulCore!");
@@ -40,6 +51,7 @@ const Form = ({ onCreateAd }) => {
             soulCoreName: soulCore.label,
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
+            world,
             roles: [
                 { name: "Sorcerer", current: 1, total: 1 },
                 { name: "Druid", current: 0, total: 1 },
@@ -49,8 +61,8 @@ const Form = ({ onCreateAd }) => {
             ]
         };
 
+        await createAd(newAd);
         onCreateAd(newAd);
-
         setSoulCore(null);
         setInputValue('');
     };
@@ -62,41 +74,53 @@ const Form = ({ onCreateAd }) => {
 
     return (
         <form onSubmit={handleSubmit} className="bg-[#453745] text-white bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center p-4">
-             <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
-                 {/* <label htmlFor="soul-core-select" className="block mb-1">
+            <div>
+                <select
+                    className="w-[180px] h-[38px] rounded text-black"
+                    value={world}
+                    onChange={(e) => setWorld(e.target.value)}
+                >
+                    <option value="">Selecione o mundo</option>
+                    {worlds.map(w => (
+                        <option key={w} value={w}>{w}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+                {/* <label htmlFor="soul-core-select" className="block mb-1">
                      Soulcore
                  </label> */}
-                 <Select
-                     id="soul-core-select"
-                     options={creatures}
-                     onChange={setSoulCore}
-                     value={soulCore}
-                     placeholder="Ex: Demon"
-                     isClearable
-                     isLoading={creatures.length === 0}
-                     styles={customStyles}
-                     noOptionsMessage={() => "Nenhuma criatura encontrada"}
-                 />
-             </div>
-             <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
-                 {/* <label htmlFor="value-input" className="block mb-1">
+                <Select
+                    id="soul-core-select"
+                    options={creatures}
+                    onChange={setSoulCore}
+                    value={soulCore}
+                    placeholder="Ex: Demon"
+                    isClearable
+                    isLoading={creatures.length === 0}
+                    styles={customStyles}
+                    noOptionsMessage={() => "Nenhuma criatura encontrada"}
+                />
+            </div>
+            <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
+                {/* <label htmlFor="value-input" className="block mb-1">
                      Valor pela vaga
                  </label> */}
-                 <input
-                     type="text"
-                     id="value-input"
-                     value={inputValue}
-                     onChange={(e) => setInputValue(e.target.value)}
-                     placeholder="Ex: 500k"
-                     className="w-full p-2 rounded text-black"
-                 />
-             </div>
-             <button
-                 type="submit"
-                 className="h-[38px] px-4 rounded bg-[#A8C090] font-bold"
-             >
-                 Criar Anúncio
-             </button>
+                <input
+                    type="text"
+                    id="value-input"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="Ex: 500k"
+                    className="w-full p-2 rounded text-black"
+                />
+            </div>
+            <button
+                type="submit"
+                className="h-[38px] px-4 rounded bg-[#A8C090] font-bold"
+            >
+                Criar Anúncio
+            </button>
         </form>
     );
 };

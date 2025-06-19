@@ -4,7 +4,6 @@ import Form from '../Form/Form';
 
 const ActionHub = ({ onCreateAd }) => {
     const [activeMode, setActiveMode] = useState('filter');
-
     const [mundos, setMundos] = useState([]);
     const [creatures, setCreatures] = useState([]);
     const [selectedBoss, setSelectedBoss] = useState(null);

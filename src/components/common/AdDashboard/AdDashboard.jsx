@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ActionHub from '../ActionHub/ActionHub';
 import Card from '../Card/Card';
+import { getAds } from '../../../firebase/firestoreService';
 
 const AdDashboard = () => {
     const [ads, setAds] = useState([]);
     const [filters, setFilters] = useState({ boss: '', world: '' });
 
     useEffect(() => {
-        const savedAds = localStorage.getItem('bossAds');
-        if (savedAds) {
-            setAds(JSON.parse(savedAds));
+        async function fetchAds () {
+            const allAds = await getAds();
+            setAds(allAds);            
         }
+        fetchAds();
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('bossAds', JSON.stringify(ads));
-    }, [ads]);
 
     const handleCreateAd = (newAd) => {
         setAds(prevAds => [newAd, ...prevAds]);

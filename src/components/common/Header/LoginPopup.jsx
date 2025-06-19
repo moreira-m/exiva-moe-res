@@ -1,6 +1,6 @@
 import React from 'react';
 import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from './../../../firebase';
+import { auth, provider } from './../../../firebase/firebase';
 import googleIcon from '../../../assets/google-icon.png'
 import facebookIcon from '../../../assets/facebook-icon.png'
 

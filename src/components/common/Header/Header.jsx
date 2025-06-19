@@ -55,7 +55,6 @@ const Header = ({ children }) => {
           </svg>
         </button>
 
-
         {menuOpen && (
           <div className="absolute top-[70px] left-0 w-full bg-[#2B2C30] flex flex-col items-center gap-4 py-4 md:hidden z-50 shadow-lg">
             {navLinks.map(link => (
