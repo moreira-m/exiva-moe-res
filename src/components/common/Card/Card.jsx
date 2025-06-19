@@ -6,6 +6,14 @@ const handleFavoriteClick = () => {
 
 };
 
+const roleIcons = {
+    Sorcerer: '/roles/sorcerer-icon.gif',
+    Druid: '/roles/druid-icon.gif',
+    Knight: '/roles/knight-icon.gif',
+    Paladin: '/roles/paladin-icon.gif',
+    Monk: '/roles/monk-icon.gif',
+};
+
 const Card = ({ adData }) => {
     console.log(adData.roles);
 
@@ -38,15 +46,15 @@ const Card = ({ adData }) => {
                         <img src={crystalCoinIcon} alt="Crystal Coin" />
                         <p className='text-white mt-auto mb-auto'>{adData.value}</p>
                     </div>
-                    <div className='flex flex-row gap-6'>
-                        {adData.roles.map((role, index) => {
-                            console.log(role.icon);
-                            return (
-                                <div key={index} className="flex items-center gap-1">
-                                    <img src={role.icon} alt="role" className="w-5 h-5" />
-                                </div>
-                            );
-                        })}
+                    <div className='flex flex-row gap-2'>
+                        {adData.roles.map((role, idx) => (
+                            <img
+                                key={idx}
+                                src={role.icon ?? roleIcons[role.name]}   // ← fallback
+                                alt=""
+                                className="w-[45px] h-[45px]"
+                            />
+                        ))}
                     </div>
                     <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] font-bold mt-auto text-white w-full'>
                         Aplicar

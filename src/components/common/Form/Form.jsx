@@ -40,15 +40,11 @@ const Form = ({ onCreateAd }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!soulCore) {
-            alert("Insira um SoulCore!");
-            return;
-        }
+        if (!soulCore) return alert('Insira um SoulCore!');
+        if (!world) return alert('Selecione um mundo!');
 
-        if (!world) {
-            alert("Selecione um mundo!")
-            return;
-        }
+        const base = import.meta.env.BASE_URL;
+
 
         const newAd = {
             id: new Date().getTime(),
@@ -65,12 +61,12 @@ const Form = ({ onCreateAd }) => {
             //     { name: "Monk", current: 0, total: 1 },
             // ]
             roles: [
-                { icon: '/roles/sorcerer.gif', current: 1, total: 1 },
-                { icon: '/roles/druid.gif', current: 0, total: 1 },
-                { icon: '/roles/knight.gif', current: 0, total: 1 },
-                { icon: '/roles/paladin.gif', current: 0, total: 1 },
-                { icon: '/roles/monk.gif', current: 0, total: 1 },
-            ]
+                { icon: `${base}roles/sorcerer-icon.gif`, current: 1, total: 1 },
+                { icon: `${base}roles/druid-outfit.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/knight-outfit.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/hunt-outfit.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/monk-outfit.gif`, current: 0, total: 1 },
+            ],
         };
 
         // const roleIcons = {
