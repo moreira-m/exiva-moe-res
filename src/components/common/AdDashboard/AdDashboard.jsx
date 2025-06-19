@@ -35,7 +35,7 @@ const AdDashboard = () => {
 
     const title = filters.world
         ? `Soulcores em ${filters.world}`
-        : 'Soulcore';
+        : 'Soulcores';
 
     return (
         <div>
