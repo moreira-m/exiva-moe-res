@@ -19,7 +19,7 @@ const Card = ({ adData }) => {
     console.log(adData.roles);
 
     return (
-        <div className='bg-[#453745] w-[450px] h-auto flex-shrink-0 rounded-lg gap-4 flex flex-row p-3 relative max-h-64'>
+        <div className='bg-[#453745] w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
 
             {/* Estrela de favoritar */}
             <button
