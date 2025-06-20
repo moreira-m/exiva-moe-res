@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
 import SearchIconCards from '../../../assets/search-icon-cards.svg?react'
+import DetailsPopup from './DetailsPopup';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
 const handleFavoriteClick = () => {
@@ -17,7 +18,11 @@ const roleIcons = {
 };
 
 const Card = ({ adData }) => {
-    console.log(adData.roles);
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleSearchClick = () => {
+        setShowPopup(true);
+    };
 
     return (
         <div className='bg-[#453745] w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
@@ -61,9 +66,13 @@ const Card = ({ adData }) => {
                     </div>
                     <div className='flex flex-row overflow-hidden w-full justify-between gap-6'>
                         <SearchIconCards
-                            onClick={handleFavoriteClick}
+                            onClick={handleSearchClick}
                             className='cursor-pointer m-auto'
                         />
+
+                        {showPopup && (
+                            <DetailsPopup onClose={() => setShowPopup(false)} />
+                        )}
 
                         <button className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
                             Aplicar
