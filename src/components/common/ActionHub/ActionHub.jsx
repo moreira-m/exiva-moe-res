@@ -95,14 +95,18 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
             <div className="w-full mt-1">
                 {activeMode === 'filter' && (
                     <div className="bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center">
-                        <select
-                            className="w-[170px] h-[38px] rounded border-gray-300"
-                            value={selectedWorld}
-                            onChange={(e) => setSelectedWorld(e.target.value)}
-                        >
-                            <option value="">Todos Mundos</option>
-                            {mundos.map(m => <option key={m} value={m}>{m}</option>)}
-                        </select>
+                        <Select
+                            className="min-w-[180px] w-fit"
+                            options={mundos.map(w => ({ label: w, value: w }))}
+                            value={selectedWorld ? { label: selectedWorld, value: selectedWorld } : null}
+                            onChange={(selected) => {
+                                const selectedValue = selected ? selected.value : '';
+                                setSelectedWorld(selectedValue);
+                            }}
+                            placeholder="Selecione o mundo"
+                            isClearable
+                            styles={{ option: (p) => ({ ...p, color: 'black' }) }}
+                        />
                         <Select
                             className="w-[250px]"
                             options={creatures}

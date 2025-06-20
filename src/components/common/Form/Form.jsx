@@ -76,20 +76,19 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     return (
         <form onSubmit={handleSubmit} className="bg-[#453745] text-white bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center p-4">
             <div>
-                <select
-                    className="w-[180px] h-[38px] rounded text-black"
-                    value={world}
-                    onChange={(e) => {
-                        const selected = e.target.value;
-                        setWorld(selected);
-                        onWorldSelect && onWorldSelect(selected);
+                <Select 
+                    options={worlds.map(w => ({ label: w, value: w }))}
+                    value={world ? { label: world, value: world } : null}
+                    onChange={(selected) => {
+                        const selectedValue = selected ? selected.value : '';
+                        setWorld(selectedValue);
+                        onWorldSelect && onWorldSelect(selectedValue);
                     }}
-                >
-                    <option value="">Selecione o mundo</option>
-                    {worlds.map(w => (
-                        <option key={w} value={w}>{w}</option>
-                    ))}
-                </select>
+
+                    placeholder="Selecione o mundo"
+                    isClearable
+                    styles={{ option: (p) => ({ ...p, color: 'black' }) }}
+                />
             </div>
             <div className="w-fit min-w-[180px] h-[38px] rounded border-gray-300">
                 {/* <label htmlFor="soul-core-select" className="block mb-1">
