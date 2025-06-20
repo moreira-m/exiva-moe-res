@@ -8,6 +8,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [creatures, setCreatures] = useState([]);
     const [selectedBoss, setSelectedBoss] = useState(null);
     const [selectedWorld, setSelectedWorld] = useState('');
+    
 
     useEffect(() => {
         async function fetchMundos() {
@@ -112,7 +113,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
                             options={creatures}
                             value={selectedBoss}
                             onChange={setSelectedBoss}
-                            placeholder="Nome do Boss..."
+                            placeholder="Soulcore"
                             isClearable
                             styles={{ option: (p) => ({ ...p, color: 'black' }) }}
                         />

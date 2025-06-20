@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { createAd } from '../../../firebase/firestoreService';
+import LimitPopup from "./LimitPopup";
+import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService';
+import { Timestamp } from "firebase/firestore";
 
 const Form = ({ onCreateAd, onWorldSelect }) => {
     const [creatures, setCreatures] = useState([]);
@@ -8,6 +10,7 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     const [inputValue, setInputValue] = useState('');
     const [world, setWorld] = useState('');
     const [worlds, setWorlds] = useState([]);
+    const [showLimitPopup, setShowLimitPopup] = useState(false);
 
     useEffect(() => {
         async function fetchCreatures() {
@@ -43,16 +46,27 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
         if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
         if (!world) return alert('Selecione um mundo!'); // mudar alerta
 
-        const base = import.meta.env.BASE_URL;
+        const isLoggedIn = false;
+        const anonId = getOrCreateAnonUserId();
+        const maxAds = isLoggedIn ? 5 : 1;
+        const adsToday = await getAdsCreateToday(anonId);
 
+        if (adsToday >= maxAds) {
+            console.log('Atingiu o limite');
+            setShowLimitPopup(true);
+            return;
+        }
+
+        const base = import.meta.env.BASE_URL;
 
         const newAd = {
             id: new Date().getTime(),
-            createdAt: new Date().getTime(),
+            createdAt: Timestamp.now(),
             soulCoreName: soulCore.label,
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
             world,
+            userId: anonId,
             roles: [
                 { icon: `${base}roles/sorcerer-front.png`, current: 1, total: 1 },
                 { icon: `${base}roles/druid-front.png`, current: 0, total: 1 },
@@ -64,6 +78,11 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
 
         await createAd(newAd);
         onCreateAd(newAd);
+
+        if (!isLoggedIn) {
+            markAdCreateNow();
+        }
+
         setSoulCore(null);
         setInputValue('');
     };
@@ -73,8 +92,21 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
         control: (provided) => ({ ...provided, backgroundColor: '#fff', border: '1px solid #ccc' }),
     };
 
+    const getOrCreateAnonUserId = () => {
+        const existingId = localStorage.getItem('anonUserId');
+        if (existingId) return existingId;
+
+        const newId = crypto.randomUUID(); //aqui vai criar um novo ID
+        localStorage.setItem('anonUserId', newId);
+        return newId;
+    };
+
+    const markAdCreateNow = () => {
+        localStorage.setItem('anonLastAdTimestamp', Date.now());
+    };
+
     return (
-        <form onSubmit={handleSubmit} className="bg-[#453745] text-white bg-[#453745] p-4 rounded-b-lg flex flex-row gap-4 justify-center p-4">
+        <form onSubmit={handleSubmit} className="text-white bg-[#453745] rounded-b-lg flex flex-row gap-4 justify-center p-4">
             <div>
                 <Select 
                     options={worlds.map(w => ({ label: w, value: w }))}
@@ -125,6 +157,10 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             >
                 Criar Anúncio
             </button>
+
+            {showLimitPopup && (
+                <LimitPopup onClose={() => setShowLimitPopup(false)} />
+            )}
         </form>
     );
 };

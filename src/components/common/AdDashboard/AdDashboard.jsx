@@ -29,7 +29,7 @@ const AdDashboard = () => {
 
     const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
     const activeAds = ads
-        .filter(ad => (new Date().getTime() - ad.createdAt) < oneDayInMilliseconds)
+        .filter(ad => (new Date().getTime() - ad.createdAt.toDate().getTime()) < oneDayInMilliseconds)
         .filter(ad => filters.boss ? ad.soulCoreName === filters.boss : true)
         .filter(ad => filters.world ? ad.world === filters.world : true);
 
@@ -40,6 +40,7 @@ const AdDashboard = () => {
     return (
         <div>
             <ActionHub
+                onCreateAd={handleCreateAd}
                 onFilterChange={handleFilterChange}
                 showCreateForm={showCreateForm}
                 setShowCreateForm={(v) => {
