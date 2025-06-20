@@ -58,7 +58,7 @@ const Card = ({ adData }) => {
                         ))}
                         {/* <img src={tilesBossIcon} /> */}
                     </div>
-                    <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] font-bold mt-auto text-white w-full'>
+                    <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] mt-auto text-black w-full'>
                         Aplicar
                     </button>
                 </div>
