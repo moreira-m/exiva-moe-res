@@ -1,6 +1,7 @@
 import React from 'react';
 import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
+import SearchIconCards from '../../../assets/search-icon-cards.svg?react'
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
 const handleFavoriteClick = () => {
@@ -58,9 +59,16 @@ const Card = ({ adData }) => {
                         ))}
                         {/* <img src={tilesBossIcon} /> */}
                     </div>
-                    <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] mt-auto text-black w-full'>
-                        Aplicar
-                    </button>
+                    <div className='flex flex-row overflow-hidden w-full justify-between gap-6'>
+                        <SearchIconCards
+                            onClick={handleFavoriteClick}
+                            className='cursor-pointer m-auto'
+                        />
+
+                        <button className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
+                            Aplicar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
