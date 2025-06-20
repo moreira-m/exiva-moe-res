@@ -1,17 +1,18 @@
 import React from 'react';
 import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
+// import tilesBossIcon from '../../../assets/tiles-icon.png'
 
 const handleFavoriteClick = () => {
 
 };
 
 const roleIcons = {
-    Sorcerer: '/roles/sorcerer-icon.gif',
-    Druid: '/roles/druid-icon.gif',
-    Knight: '/roles/knight-icon.gif',
-    Paladin: '/roles/paladin-icon.gif',
-    Monk: '/roles/monk-icon.gif',
+    Sorcerer: '/roles/sorcerer-front.png',
+    Druid: '/roles/druid-front.png',
+    Knight: '/roles/knight-front.png',
+    Paladin: '/roles/paladin-front.png',
+    Monk: '/roles/monk-front.png',
 };
 
 const Card = ({ adData }) => {
@@ -55,6 +56,7 @@ const Card = ({ adData }) => {
                                 className="w-[45px] h-[45px]"
                             />
                         ))}
+                        {/* <img src={tilesBossIcon} /> */}
                     </div>
                     <button className='w-[79px] h-[30px] flex-shrink-0 rounded-[8px] bg-[#A8C090] font-bold mt-auto text-white w-full'>
                         Aplicar

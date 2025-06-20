@@ -54,11 +54,11 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             value: inputValue || "A combinar",
             world,
             roles: [
-                { icon: `${base}roles/sorcerer-icon.gif`, current: 1, total: 1 },
-                { icon: `${base}roles/druid-icon.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/knight-icon.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/paladin-icon.gif`, current: 0, total: 1 },
-                { icon: `${base}roles/monk-icon.gif`, current: 0, total: 1 },
+                { icon: `${base}roles/sorcerer-front.png`, current: 1, total: 1 },
+                { icon: `${base}roles/druid-front.png`, current: 0, total: 1 },
+                { icon: `${base}roles/knight-front.png`, current: 0, total: 1 },
+                { icon: `${base}roles/paladin-front.png`, current: 0, total: 1 },
+                { icon: `${base}roles/monk-front.png`, current: 0, total: 1 },
             ],
         };
 
