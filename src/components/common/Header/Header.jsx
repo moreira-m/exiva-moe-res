@@ -1,17 +1,25 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
+import UserProfilePopup from './UserProfilePopup';
 
 const navLinks = [
 ];
 
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const location = useLocation();
-  const { user, login } = useContext(AuthContext);
+  const { user, login, logout } = useContext(AuthContext);
 
   const handleLoginClick = () => {
     login();
+    setMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setProfileOpen(false);
     setMenuOpen(false);
   };
 
@@ -37,9 +45,12 @@ const Header = ({ children }) => {
             </Link>
           ))}
           {user ? (
-            <div className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold">
+            <button
+              onClick={() => setProfileOpen(true)}
+              className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
+            >
               {user.email ? user.email.charAt(0).toUpperCase() : '?'}
-            </div>
+            </button>
           ) : (
             <button
               onClick={handleLoginClick}
@@ -75,9 +86,12 @@ const Header = ({ children }) => {
               </Link>
             ))}
             {user ? (
-              <div className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold">
+              <button
+                onClick={() => setProfileOpen(true)}
+                className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
+              >
                 {user.email ? user.email.charAt(0).toUpperCase() : '?'}
-              </div>
+              </button>
             ) : (
               <button
                 onClick={handleLoginClick}
@@ -91,7 +105,13 @@ const Header = ({ children }) => {
         )}
       </div>
 
-      { /* login popup removed */ }
+      {profileOpen && (
+        <UserProfilePopup
+          user={user}
+          onClose={() => setProfileOpen(false)}
+          onLogout={handleLogout}
+        />
+      )}
     </header>
   );
 };
