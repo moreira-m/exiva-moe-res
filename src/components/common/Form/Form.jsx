@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 import LimitPopup from "./LimitPopup";
 import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService';
 import { Timestamp } from "firebase/firestore";
+import { AuthContext } from '../../../context/AuthContext';
 
 const Form = ({ onCreateAd, onWorldSelect }) => {
     const [creatures, setCreatures] = useState([]);
@@ -41,12 +42,14 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     }, []);
 
 
+    const { user } = useContext(AuthContext);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
         if (!world) return alert('Selecione um mundo!'); // mudar alerta
 
-        const isLoggedIn = false;
+        const isLoggedIn = !!user;
         const anonId = getOrCreateAnonUserId();
         const maxAds = isLoggedIn ? 5 : 1;
         const adsToday = await getAdsCreateToday(anonId);
