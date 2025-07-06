@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import LoginPopup from './LoginPopup';
+import { AuthContext } from '../../../context/AuthContext';
 
 const navLinks = [
 ];
 
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const location = useLocation();
+  const { user, login } = useContext(AuthContext);
 
   const handleLoginClick = () => {
-    setShowLoginPopup(true);
+    login();
     setMenuOpen(false);
   };
 
@@ -36,12 +36,18 @@ const Header = ({ children }) => {
               {link.name}
             </Link>
           ))}
-          <button
-            onClick={handleLoginClick}
-            className="text-white hover:text-[#613C4C] transition bg-[#BF6370] px-4 py-2 rounded"
-          >
-            Login
-          </button>
+          {user ? (
+            <div className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold">
+              {user.email ? user.email.charAt(0).toUpperCase() : '?'}
+            </div>
+          ) : (
+            <button
+              onClick={handleLoginClick}
+              className="text-white hover:text-[#613C4C] transition bg-[#BF6370] px-4 py-2 rounded"
+            >
+              Login
+            </button>
+          )}
           {children}
         </nav>
 
@@ -68,20 +74,24 @@ const Header = ({ children }) => {
                 {link.name}
               </Link>
             ))}
-            <button
-              onClick={handleLoginClick}
-              className="text-white hover:text-[#613C4C] text-lg"
-            >
-              Login
-            </button>
+            {user ? (
+              <div className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold">
+                {user.email ? user.email.charAt(0).toUpperCase() : '?'}
+              </div>
+            ) : (
+              <button
+                onClick={handleLoginClick}
+                className="text-white hover:text-[#613C4C] text-lg"
+              >
+                Login
+              </button>
+            )}
             {children}
           </div>
         )}
       </div>
 
-      {showLoginPopup && (
-        <LoginPopup onClose={() => setShowLoginPopup(false)} />
-      )}
+      { /* login popup removed */ }
     </header>
   );
 };
