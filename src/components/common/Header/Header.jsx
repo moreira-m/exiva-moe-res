@@ -3,11 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import UserProfilePopup from './UserProfilePopup';
 
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Minhas Vagas', path: '/my-ads' },
-  { name: 'Minhas Aplicações', path: '/my-applications' },
-];
+// Navigation links were moved to the user profile popup
+const navLinks = [];
 
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
