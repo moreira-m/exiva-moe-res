@@ -32,13 +32,13 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied }) => (
             </ul>
             <button
                 onClick={onApply}
-                disabled={alreadyApplied}
-                className="mt-4 w-full h-[30px] rounded-[8px] bg-[#A8C090] text-black disabled:opacity-50"
+                className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
             >
-                {alreadyApplied ? 'Aplicado' : 'Aplicar'}
+                {alreadyApplied ? 'Remover' : 'Aplicar'}
             </button>
         </div>
     </div>
 );
 
 export default DetailsPopup;
+
