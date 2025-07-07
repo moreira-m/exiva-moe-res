@@ -5,13 +5,16 @@ import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService'
 import { Timestamp } from "firebase/firestore";
 import { AuthContext } from '../../../context/AuthContext';
 
-const Form = ({ onCreateAd, onWorldSelect }) => {
+const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
+
+const Form = ({ onCreateAd, onWorldSelect, charInfo }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [world, setWorld] = useState('');
     const [worlds, setWorlds] = useState([]);
     const [showLimitPopup, setShowLimitPopup] = useState(false);
+    const [requireApproval, setRequireApproval] = useState(false);
 
     useEffect(() => {
         async function fetchCreatures() {
@@ -63,7 +66,7 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             return;
         }
 
-        const base = import.meta.env.BASE_URL;
+        if (!charInfo) return alert('Informe os dados do personagem');
 
         const newAd = {
             id: new Date().getTime(),
@@ -73,13 +76,9 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             value: inputValue || "A combinar",
             world,
             userId,
-            roles: [
-                { icon: `${base}roles/sorcerer-front.png`, current: 1, total: 1 },
-                { icon: `${base}roles/druid-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/knight-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/paladin-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/monk-front.png`, current: 0, total: 1 },
-            ],
+            approvalRequired: requireApproval,
+            party: [charInfo],
+            pending: [],
         };
 
         await createAd(newAd);
@@ -139,6 +138,15 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
                     placeholder="Ex: 500k"
                     className="w-full p-2 rounded text-black"
                 />
+            </div>
+            <div className="flex items-center gap-2">
+                <input
+                    type="checkbox"
+                    id="approval-check"
+                    checked={requireApproval}
+                    onChange={(e) => setRequireApproval(e.target.checked)}
+                />
+                <label htmlFor="approval-check">Aprovar inscrições</label>
             </div>
             <button
                 type="submit"

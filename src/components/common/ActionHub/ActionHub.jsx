@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';
 import Form from '../Form/Form';
 import { AuthContext } from '../../../context/AuthContext';
+import CharPopup from '../Form/CharPopup';
 
 const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [activeMode, setActiveMode] = useState('filter');
@@ -9,6 +10,8 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [creatures, setCreatures] = useState([]);
     const [selectedBoss, setSelectedBoss] = useState(null);
     const [selectedWorld, setSelectedWorld] = useState('');
+    const [charInfo, setCharInfo] = useState(null);
+    const [showCharPopup, setShowCharPopup] = useState(false);
     const { user, login } = useContext(AuthContext);
     
 
@@ -66,6 +69,8 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
             setSelectedBoss(null);
             setSelectedWorld('');
             onFilterChange({ boss: '', world: '' });
+            setShowCharPopup(true);
+            return;
         }
         setActiveMode(mode);
     };
@@ -76,6 +81,13 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
         setSelectedWorld(newAd.world);
         setSelectedBoss(null);
         onFilterChange({ boss: '', world: newAd.world });
+        setCharInfo(null);
+    };
+
+    const handleCharSubmit = (info) => {
+        setCharInfo(info);
+        setShowCharPopup(false);
+        setActiveMode('create');
     };
 
     const baseStyle = "py-2 px-6 font-bold transition-all duration-300";
@@ -128,8 +140,15 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
 
                 {activeMode === 'create' && (
                     <div className="bg-transparent rounded-b-lg">
-                        <Form onCreateAd={handleCreateAd} onWorldSelect={(world) => onFilterChange({ boss: '', world })} />
+                        <Form
+                            onCreateAd={handleCreateAd}
+                            onWorldSelect={(world) => onFilterChange({ boss: '', world })}
+                            charInfo={charInfo}
+                        />
                     </div>
+                )}
+                {showCharPopup && (
+                    <CharPopup onSubmit={handleCharSubmit} onClose={() => setShowCharPopup(false)} />
                 )}
             </div>
         </div>
