@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 import LimitPopup from "./LimitPopup";
+import CharPopup from "./CharPopup";
 import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService';
 import { Timestamp } from "firebase/firestore";
 import { AuthContext } from '../../../context/AuthContext';
+
+const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
 
 const Form = ({ onCreateAd, onWorldSelect }) => {
     const [creatures, setCreatures] = useState([]);
@@ -12,6 +15,8 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     const [world, setWorld] = useState('');
     const [worlds, setWorlds] = useState([]);
     const [showLimitPopup, setShowLimitPopup] = useState(false);
+    const [requireApproval, setRequireApproval] = useState(false);
+    const [showCharPopup, setShowCharPopup] = useState(false);
 
     useEffect(() => {
         async function fetchCreatures() {
@@ -50,40 +55,38 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             alert('Faça login para anunciar vagas');
             return;
         }
-        if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
-        if (!world) return alert('Selecione um mundo!'); // mudar alerta
+        if (!soulCore) return alert('Insira um SoulCore!');
+        if (!world) return alert('Selecione um mundo!');
 
         const userId = user.uid;
         const maxAds = 5;
         const adsToday = await getAdsCreateToday(userId);
 
         if (adsToday >= maxAds) {
-            console.log('Atingiu o limite');
             setShowLimitPopup(true);
             return;
         }
 
-        const base = import.meta.env.BASE_URL;
+        setShowCharPopup(true);
+    };
 
-        const newAd = {
-            id: new Date().getTime(),
+    const handleCharSubmit = async (info) => {
+        setShowCharPopup(false);
+
+        const adData = {
             createdAt: Timestamp.now(),
             soulCoreName: soulCore.label,
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
             world,
-            userId,
-            roles: [
-                { icon: `${base}roles/sorcerer-front.png`, current: 1, total: 1 },
-                { icon: `${base}roles/druid-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/knight-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/paladin-front.png`, current: 0, total: 1 },
-                { icon: `${base}roles/monk-front.png`, current: 0, total: 1 },
-            ],
+            userId: user.uid,
+            approvalRequired: requireApproval,
+            party: [{ ...info, userId: user.uid }],
+            pending: [],
         };
 
-        await createAd(newAd);
-        onCreateAd(newAd);
+        const id = await createAd(adData);
+        onCreateAd({ id, ...adData });
 
         setSoulCore(null);
         setInputValue('');
@@ -140,6 +143,15 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
                     className="w-full p-2 rounded text-black"
                 />
             </div>
+            <div className="flex items-center gap-2">
+                <input
+                    type="checkbox"
+                    id="approval-check"
+                    checked={requireApproval}
+                    onChange={(e) => setRequireApproval(e.target.checked)}
+                />
+                <label htmlFor="approval-check">Aprovar inscrições</label>
+            </div>
             <button
                 type="submit"
                 className="h-[38px] px-4 rounded bg-[#A8C090] font-bold"
@@ -147,11 +159,14 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
                 Criar Anúncio
             </button>
 
-            {showLimitPopup && (
-                <LimitPopup onClose={() => setShowLimitPopup(false)} />
-            )}
-        </form>
-    );
+        {showLimitPopup && (
+            <LimitPopup onClose={() => setShowLimitPopup(false)} />
+        )}
+        {showCharPopup && (
+            <CharPopup onSubmit={handleCharSubmit} onClose={() => setShowCharPopup(false)} />
+        )}
+    </form>
+);
 };
 
 export default Form;

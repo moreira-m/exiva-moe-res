@@ -4,6 +4,9 @@ import { AuthContext } from '../../../context/AuthContext';
 import UserProfilePopup from './UserProfilePopup';
 
 const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Minhas Vagas', path: '/my-ads' },
+  { name: 'Minhas Aplicações', path: '/my-applications' },
 ];
 
 const Header = ({ children }) => {

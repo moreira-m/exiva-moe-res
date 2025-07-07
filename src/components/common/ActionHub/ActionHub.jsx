@@ -128,7 +128,10 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
 
                 {activeMode === 'create' && (
                     <div className="bg-transparent rounded-b-lg">
-                        <Form onCreateAd={handleCreateAd} onWorldSelect={(world) => onFilterChange({ boss: '', world })} />
+                        <Form
+                            onCreateAd={handleCreateAd}
+                            onWorldSelect={(world) => onFilterChange({ boss: '', world })}
+                        />
                     </div>
                 )}
             </div>
