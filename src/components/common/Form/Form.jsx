@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 import LimitPopup from "./LimitPopup";
-import CharPopup from "./CharPopup";
 import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService';
 import { Timestamp } from "firebase/firestore";
 import { AuthContext } from '../../../context/AuthContext';
 
 const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
 
-const Form = ({ onCreateAd, onWorldSelect }) => {
+const Form = ({ onCreateAd, onWorldSelect, charInfo }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
     const [inputValue, setInputValue] = useState('');
@@ -16,7 +15,6 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     const [worlds, setWorlds] = useState([]);
     const [showLimitPopup, setShowLimitPopup] = useState(false);
     const [requireApproval, setRequireApproval] = useState(false);
-    const [showCharPopup, setShowCharPopup] = useState(false);
 
     useEffect(() => {
         async function fetchCreatures() {
@@ -55,38 +53,36 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             alert('Faça login para anunciar vagas');
             return;
         }
-        if (!soulCore) return alert('Insira um SoulCore!');
-        if (!world) return alert('Selecione um mundo!');
+        if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
+        if (!world) return alert('Selecione um mundo!'); // mudar alerta
 
         const userId = user.uid;
         const maxAds = 5;
         const adsToday = await getAdsCreateToday(userId);
 
         if (adsToday >= maxAds) {
+            console.log('Atingiu o limite');
             setShowLimitPopup(true);
             return;
         }
 
-        setShowCharPopup(true);
-    };
+        if (!charInfo) return alert('Informe os dados do personagem');
 
-    const handleCharSubmit = async (info) => {
-        setShowCharPopup(false);
-
-        const adData = {
+        const newAd = {
+            id: new Date().getTime(),
             createdAt: Timestamp.now(),
             soulCoreName: soulCore.label,
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
             world,
-            userId: user.uid,
+            userId,
             approvalRequired: requireApproval,
-            party: [{ ...info, userId: user.uid }],
+            party: [charInfo],
             pending: [],
         };
 
-        const id = await createAd(adData);
-        onCreateAd({ id, ...adData });
+        await createAd(newAd);
+        onCreateAd(newAd);
 
         setSoulCore(null);
         setInputValue('');
@@ -159,14 +155,11 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
                 Criar Anúncio
             </button>
 
-        {showLimitPopup && (
-            <LimitPopup onClose={() => setShowLimitPopup(false)} />
-        )}
-        {showCharPopup && (
-            <CharPopup onSubmit={handleCharSubmit} onClose={() => setShowCharPopup(false)} />
-        )}
-    </form>
-);
+            {showLimitPopup && (
+                <LimitPopup onClose={() => setShowLimitPopup(false)} />
+            )}
+        </form>
+    );
 };
 
 export default Form;
