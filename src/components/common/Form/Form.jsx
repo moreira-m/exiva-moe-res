@@ -72,7 +72,6 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
         }
 
         const newAd = {
-            id: new Date().getTime(),
             createdAt: Timestamp.now(),
             soulCoreName: soulCore.label,
             soulcoreImage: soulCore.image,
@@ -84,8 +83,9 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
             pending: [],
         };
 
-        await createAd(newAd);
-        onCreateAd(newAd);
+        const docId = await createAd(newAd);
+        const adWithId = { ...newAd, id: docId };
+        onCreateAd(adWithId);
 
         setSoulCore(null);
         setInputValue('');

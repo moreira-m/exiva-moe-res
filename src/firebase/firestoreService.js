@@ -77,3 +77,20 @@ export const respondToApplication = async (adId, applicantId, accept) => {
     const updatedParty = accept ? [...(data.party || []), applicant] : (data.party || []);
     await updateDoc(docRef, { pending: updatedPending, party: updatedParty });
 };
+
+export const removeApplication = async (adId, userId) => {
+    try {
+        const docRef = doc(db, 'bossAds', adId);
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) return false;
+        const data = snap.data();
+        const updatedParty = (data.party || []).filter(p => p.userId !== userId);
+        const updatedPending = (data.pending || []).filter(p => p.userId !== userId);
+        await updateDoc(docRef, { party: updatedParty, pending: updatedPending });
+        return true;
+    } catch (error) {
+        console.error('Erro ao remover aplicação:', error);
+        return false;
+    }
+};
+

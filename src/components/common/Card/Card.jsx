@@ -4,7 +4,7 @@ import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
 import SearchIconCards from '../../../assets/search-icon-cards.svg?react';
 import DetailsPopup from './DetailsPopup';
 import CharPopup from '../Form/CharPopup';
-import { applyToAd } from '../../../firebase/firestoreService';
+import { applyToAd, removeApplication } from '../../../firebase/firestoreService';
 import { AuthContext } from '../../../context/AuthContext';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
@@ -24,10 +24,10 @@ const Card = ({ adData }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [showApply, setShowApply] = useState(false);
     const [party, setParty] = useState(adData.party || []);
+    const [pending, setPending] = useState(adData.pending || []);
     const { user } = useContext(AuthContext);
     const alreadyApplied =
-        party.some(p => p.userId === user?.uid) ||
-        (adData.pending || []).some(p => p.userId === user?.uid);
+        [...party, ...pending].some(p => p.userId === user?.uid);
 
     const handleSearchClick = () => {
         setShowPopup(true);
@@ -41,11 +41,24 @@ const Card = ({ adData }) => {
             adData.approvalRequired
         );
 
-        if (success && !adData.approvalRequired) {
-            setParty(prev => [...prev, { ...info, userId: user.uid }]);
+        if (success) {
+            if (adData.approvalRequired) {
+                setPending(prev => [...prev, { ...info, userId: user.uid }]);
+            } else {
+                setParty(prev => [...prev, { ...info, userId: user.uid }]);
+            }
         }
 
         setShowApply(false);
+    };
+
+    const handleRemove = async () => {
+        if (!user) return;
+        const success = await removeApplication(adData.id, user.uid);
+        if (success) {
+            setParty(prev => prev.filter(p => p.userId !== user.uid));
+            setPending(prev => prev.filter(p => p.userId !== user.uid));
+        }
     };
 
     return (
@@ -99,18 +112,21 @@ const Card = ({ adData }) => {
                                 onClose={() => setShowPopup(false)}
                                 onApply={() => {
                                     setShowPopup(false);
-                                    setShowApply(true);
+                                    if (alreadyApplied) {
+                                        handleRemove();
+                                    } else {
+                                        setShowApply(true);
+                                    }
                                 }}
                                 alreadyApplied={alreadyApplied}
                             />
                         )}
 
                         <button
-                            onClick={() => setShowApply(true)}
-                            className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black disabled:opacity-50'
-                            disabled={alreadyApplied}
+                            onClick={alreadyApplied ? handleRemove : () => setShowApply(true)}
+                            className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
                         >
-                            {alreadyApplied ? 'Aplicado' : 'Aplicar'}
+                            {alreadyApplied ? 'Remover' : 'Aplicar'}
                         </button>
                         {showApply && (
                             <CharPopup onSubmit={handleApply} onClose={() => setShowApply(false)} />
