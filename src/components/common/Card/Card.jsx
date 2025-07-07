@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
-import SearchIconCards from '../../../assets/search-icon-cards.svg?react'
+import SearchIconCards from '../../../assets/search-icon-cards.svg?react';
 import DetailsPopup from './DetailsPopup';
+import CharPopup from '../Form/CharPopup';
+import { applyToAd } from '../../../firebase/firestoreService';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
 const handleFavoriteClick = () => {
@@ -19,9 +21,19 @@ const roleIcons = {
 
 const Card = ({ adData }) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [showApply, setShowApply] = useState(false);
+    const [party, setParty] = useState(adData.party || []);
 
     const handleSearchClick = () => {
         setShowPopup(true);
+    };
+
+    const handleApply = async (info) => {
+        await applyToAd(adData.id, info, adData.approvalRequired);
+        if (!adData.approvalRequired) {
+            setParty(prev => [...prev, info]);
+        }
+        setShowApply(false);
     };
 
     return (
@@ -54,15 +66,14 @@ const Card = ({ adData }) => {
                         <p className='text-white mt-auto mb-auto'>{adData.value}</p>
                     </div>
                     <div className='flex flex-row gap-2'>
-                        {adData.roles.map((role, idx) => (
+                        {party.map((p, idx) => (
                             <img
                                 key={idx}
-                                src={role.icon ?? roleIcons[role.name]}
-                                alt=""
-                                className="w-[45px] h-[45px]"
+                                src={roleIcons[p.vocation]}
+                                alt=''
+                                className='w-[45px] h-[45px]'
                             />
                         ))}
-                        {/* <img src={tilesBossIcon} /> */}
                     </div>
                     <div className='flex flex-row overflow-hidden w-full justify-between gap-6'>
                         <SearchIconCards
@@ -74,9 +85,14 @@ const Card = ({ adData }) => {
                             <DetailsPopup onClose={() => setShowPopup(false)} />
                         )}
 
-                        <button className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
+                        <button
+                            onClick={() => setShowApply(true)}
+                            className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
                             Aplicar
                         </button>
+                        {showApply && (
+                            <CharPopup onSubmit={handleApply} onClose={() => setShowApply(false)} />
+                        )}
                     </div>
                 </div>
             </div>

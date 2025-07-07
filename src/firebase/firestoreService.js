@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 export const createAd = async (adData) => {
     try {
@@ -43,3 +43,15 @@ export async function getAdsCreateToday(userId) {
         return 0;
     }
 }
+
+export const applyToAd = async (adId, charInfo, approvalRequired) => {
+    try {
+        const docRef = doc(db, 'bossAds', adId);
+        const field = approvalRequired ? 'pending' : 'party';
+        await updateDoc(docRef, {
+            [field]: arrayUnion(charInfo)
+        });
+    } catch (error) {
+        console.error('Erro ao aplicar para vaga:', error);
+    }
+};
