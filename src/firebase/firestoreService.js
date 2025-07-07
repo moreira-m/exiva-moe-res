@@ -1,6 +1,5 @@
 import { db } from './firebase';
 import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore, doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
-import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 export const createAd = async (adData) => {
     try {
@@ -77,9 +76,4 @@ export const respondToApplication = async (adId, applicantId, accept) => {
     const updatedPending = pending.filter(p => p.userId !== applicantId);
     const updatedParty = accept ? [...(data.party || []), applicant] : (data.party || []);
     await updateDoc(docRef, { pending: updatedPending, party: updatedParty });
-};
-
-    } catch (error) {
-        console.error('Erro ao aplicar para vaga:', error);
-    }
 };
