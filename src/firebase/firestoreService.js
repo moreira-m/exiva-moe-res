@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore, doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, Timestamp, doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
 
 export const createAd = async (adData) => {
     try {
@@ -22,8 +22,7 @@ export const getAds = async () => {
 };
 
 export async function getAdsCreateToday(userId) {
-    const db = getFirestore();
-    const adsRef = collection(db, 'ads');
+    const adsRef = collection(db, 'bossAds');
 
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
