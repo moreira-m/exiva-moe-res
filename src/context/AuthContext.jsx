@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { signInWithPopup, signOut } from 'firebase/auth';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, provider } from '../firebase/firebase';
 
 export const AuthContext = createContext({
@@ -12,22 +12,25 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) {
-      try {
-        setUser(JSON.parse(stored));
-      } catch (e) {
-        console.error('Invalid user in storage', e);
+    const unsubscribe = onAuthStateChanged(auth, (current) => {
+      setUser(current);
+      if (current) {
+        const { uid, email, displayName, photoURL } = current;
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ uid, email, displayName, photoURL })
+        );
+      } else {
         localStorage.removeItem('user');
       }
-    }
+    });
+    return () => unsubscribe();
   }, []);
 
   const login = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
-      localStorage.setItem('user', JSON.stringify(result.user));
+      provider.setCustomParameters({ prompt: 'select_account' });
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.error('Login error', error);
     }
@@ -39,8 +42,6 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error('Logout error', err);
     }
-    setUser(null);
-    localStorage.removeItem('user');
   };
 
   return (
