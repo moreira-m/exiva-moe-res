@@ -69,7 +69,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
             setSelectedBoss(null);
             setSelectedWorld('');
             onFilterChange({ boss: '', world: '' });
-            setShowCharPopup(true);
+            setActiveMode('create');
             return;
         }
         setActiveMode(mode);
@@ -144,6 +144,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
                             onCreateAd={handleCreateAd}
                             onWorldSelect={(world) => onFilterChange({ boss: '', world })}
                             charInfo={charInfo}
+                            onCharInfoRequest={() => setShowCharPopup(true)}
                         />
                     </div>
                 )}

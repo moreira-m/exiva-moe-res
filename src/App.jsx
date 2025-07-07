@@ -11,11 +11,13 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<AdDashboard />} />
-        <Route path="/my-ads" element={<MyAds />} />
-        <Route path="/my-applications" element={<MyApplications />} />
-      </Routes>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<AdDashboard />} />
+          <Route path="/my-ads" element={<MyAds />} />
+          <Route path="/my-applications" element={<MyApplications />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   )

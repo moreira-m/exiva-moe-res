@@ -7,7 +7,7 @@ import { AuthContext } from '../../../context/AuthContext';
 
 const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
 
-const Form = ({ onCreateAd, onWorldSelect, charInfo }) => {
+const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
     const [inputValue, setInputValue] = useState('');
@@ -66,7 +66,10 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo }) => {
             return;
         }
 
-        if (!charInfo) return alert('Informe os dados do personagem');
+        if (!charInfo) {
+            onCharInfoRequest && onCharInfoRequest();
+            return;
+        }
 
         const newAd = {
             id: new Date().getTime(),

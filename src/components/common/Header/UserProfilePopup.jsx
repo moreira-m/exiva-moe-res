@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserProfilePopup = ({ user, onClose, onLogout }) => {
   if (!user) return null;
@@ -18,6 +19,22 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
         )}
         <p className="font-bold">{user.displayName || user.email}</p>
         <p className="text-sm text-gray-500 mb-4">{user.email}</p>
+        <div className="flex flex-col gap-2 mb-4">
+          <Link
+            to="/my-ads"
+            onClick={onClose}
+            className="text-[#2B2C30] hover:underline"
+          >
+            Minhas Vagas
+          </Link>
+          <Link
+            to="/my-applications"
+            onClick={onClose}
+            className="text-[#2B2C30] hover:underline"
+          >
+            Minhas Aplicações
+          </Link>
+        </div>
         <button
           onClick={onLogout}
           className="mt-2 bg-[#BF6370] text-white px-4 py-2 rounded w-full hover:bg-[#a94e5b] transition"
