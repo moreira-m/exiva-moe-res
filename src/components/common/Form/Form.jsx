@@ -46,13 +46,16 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!user) {
+            alert('Faça login para anunciar vagas');
+            return;
+        }
         if (!soulCore) return alert('Insira um SoulCore!'); // mudar alerta
         if (!world) return alert('Selecione um mundo!'); // mudar alerta
 
-        const isLoggedIn = !!user;
-        const anonId = getOrCreateAnonUserId();
-        const maxAds = isLoggedIn ? 5 : 1;
-        const adsToday = await getAdsCreateToday(anonId);
+        const userId = user.uid;
+        const maxAds = 5;
+        const adsToday = await getAdsCreateToday(userId);
 
         if (adsToday >= maxAds) {
             console.log('Atingiu o limite');
@@ -69,7 +72,7 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
             soulcoreImage: soulCore.image,
             value: inputValue || "A combinar",
             world,
-            userId: anonId,
+            userId,
             roles: [
                 { icon: `${base}roles/sorcerer-front.png`, current: 1, total: 1 },
                 { icon: `${base}roles/druid-front.png`, current: 0, total: 1 },
@@ -82,10 +85,6 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
         await createAd(newAd);
         onCreateAd(newAd);
 
-        if (!isLoggedIn) {
-            markAdCreateNow();
-        }
-
         setSoulCore(null);
         setInputValue('');
     };
@@ -93,19 +92,6 @@ const Form = ({ onCreateAd, onWorldSelect }) => {
     const customStyles = {
         option: (provided) => ({ ...provided, color: 'black' }),
         control: (provided) => ({ ...provided, backgroundColor: '#fff', border: '1px solid #ccc' }),
-    };
-
-    const getOrCreateAnonUserId = () => {
-        const existingId = localStorage.getItem('anonUserId');
-        if (existingId) return existingId;
-
-        const newId = crypto.randomUUID(); //aqui vai criar um novo ID
-        localStorage.setItem('anonUserId', newId);
-        return newId;
-    };
-
-    const markAdCreateNow = () => {
-        localStorage.setItem('anonLastAdTimestamp', Date.now());
     };
 
     return (
