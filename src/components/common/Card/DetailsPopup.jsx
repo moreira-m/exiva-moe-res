@@ -1,11 +1,44 @@
 import React from 'react';
 
-const DetailsPopup = () => {
-    return (
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-30px] p-2 bg-white text-black rounded shadow-lg z-50">
-            <p className="text-sm font-semibold">Detalhes do time em breve!</p>
-        </div>
-    );
+const roleIcons = {
+    Sorcerer: '/roles/sorcerer-front.png',
+    Druid: '/roles/druid-front.png',
+    Knight: '/roles/knight-front.png',
+    Paladin: '/roles/paladin-front.png',
+    Monk: '/roles/monk-front.png',
 };
+
+const DetailsPopup = ({ party, onClose, onApply, alreadyApplied }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
+            <button
+                onClick={onClose}
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"
+            >
+                &times;
+            </button>
+            <h2 className="text-lg font-bold mb-2 text-center">Participantes</h2>
+            <ul className="flex flex-col gap-2 max-h-60 overflow-y-auto">
+                {party.map((p, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                        <img src={roleIcons[p.vocation]} alt={p.vocation} className="w-8 h-8" />
+                        <span>{p.name}</span>
+                        <span className="ml-auto">lvl {p.level}</span>
+                    </li>
+                ))}
+                {party.length === 0 && (
+                    <li className="text-center text-sm">Nenhum participante</li>
+                )}
+            </ul>
+            <button
+                onClick={onApply}
+                disabled={alreadyApplied}
+                className="mt-4 w-full h-[30px] rounded-[8px] bg-[#A8C090] text-black disabled:opacity-50"
+            >
+                {alreadyApplied ? 'Aplicado' : 'Aplicar'}
+            </button>
+        </div>
+    </div>
+);
 
 export default DetailsPopup;

@@ -94,7 +94,15 @@ const Card = ({ adData }) => {
                         />
 
                         {showPopup && (
-                            <DetailsPopup onClose={() => setShowPopup(false)} />
+                            <DetailsPopup
+                                party={party}
+                                onClose={() => setShowPopup(false)}
+                                onApply={() => {
+                                    setShowPopup(false);
+                                    setShowApply(true);
+                                }}
+                                alreadyApplied={alreadyApplied}
+                            />
                         )}
 
                         <button
