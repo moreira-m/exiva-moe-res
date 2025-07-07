@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';
 import Form from '../Form/Form';
+import { AuthContext } from '../../../context/AuthContext';
 
 const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [activeMode, setActiveMode] = useState('filter');
@@ -8,6 +9,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [creatures, setCreatures] = useState([]);
     const [selectedBoss, setSelectedBoss] = useState(null);
     const [selectedWorld, setSelectedWorld] = useState('');
+    const { user, login } = useContext(AuthContext);
     
 
     useEffect(() => {
@@ -56,12 +58,16 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     }, [selectedWorld, selectedBoss, activeMode]);
 
     const toggleMode = (mode) => {
-        setActiveMode(mode);
         if (mode === 'create') {
+            if (!user) {
+                login();
+                return;
+            }
             setSelectedBoss(null);
             setSelectedWorld('');
             onFilterChange({ boss: '', world: '' });
         }
+        setActiveMode(mode);
     };
 
     const handleCreateAd = (newAd) => {
