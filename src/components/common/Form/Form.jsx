@@ -79,7 +79,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
             world,
             userId,
             approvalRequired: requireApproval,
-            party: [charInfo],
+            party: [{ ...charInfo, userId }],
             pending: [],
         };
 
