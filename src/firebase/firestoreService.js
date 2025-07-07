@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, Timestamp, getFirestore, doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
 
 export const createAd = async (adData) => {
     try {
@@ -43,3 +43,37 @@ export async function getAdsCreateToday(userId) {
         return 0;
     }
 }
+
+export const applyToAd = async (adId, charInfo, approvalRequired) => {
+    try {
+        const docRef = doc(db, 'bossAds', adId);
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) return false;
+        const data = snap.data();
+        const existing = [...(data.party || []), ...(data.pending || [])];
+        if (existing.some(p => p.userId === charInfo.userId)) {
+            return false;
+        }
+        const field = approvalRequired ? 'pending' : 'party';
+        await updateDoc(docRef, {
+            [field]: arrayUnion(charInfo)
+        });
+        return true;
+    } catch (error) {
+        console.error('Erro ao aplicar para vaga:', error);
+        return false;
+    }
+};
+
+export const respondToApplication = async (adId, applicantId, accept) => {
+    const docRef = doc(db, 'bossAds', adId);
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const pending = (data.pending || []);
+    const applicant = pending.find(p => p.userId === applicantId);
+    if (!applicant) return;
+    const updatedPending = pending.filter(p => p.userId !== applicantId);
+    const updatedParty = accept ? [...(data.party || []), applicant] : (data.party || []);
+    await updateDoc(docRef, { pending: updatedPending, party: updatedParty });
+};
