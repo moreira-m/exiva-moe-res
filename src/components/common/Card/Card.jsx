@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import crystalCoinIcon from '../../../assets/Crystal_Coin.gif';
 import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
 import SearchIconCards from '../../../assets/search-icon-cards.svg?react';
 import DetailsPopup from './DetailsPopup';
 import CharPopup from '../Form/CharPopup';
 import { applyToAd } from '../../../firebase/firestoreService';
+import { AuthContext } from '../../../context/AuthContext';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
 const handleFavoriteClick = () => {
@@ -23,12 +24,20 @@ const Card = ({ adData }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [showApply, setShowApply] = useState(false);
     const [party, setParty] = useState(adData.party || []);
+    const { user } = useContext(AuthContext);
+    const alreadyApplied =
+        party.some(p => p.userId === user?.uid) ||
+        (adData.pending || []).some(p => p.userId === user?.uid);
 
     const handleSearchClick = () => {
         setShowPopup(true);
     };
 
     const handleApply = async (info) => {
+        if (!user) return;
+        const success = await applyToAd(adData.id, { ...info, userId: user.uid }, adData.approvalRequired);
+        if (success && !adData.approvalRequired) {
+            setParty(prev => [...prev, { ...info, userId: user.uid }]);
         await applyToAd(adData.id, info, adData.approvalRequired);
         if (!adData.approvalRequired) {
             setParty(prev => [...prev, info]);
@@ -87,6 +96,10 @@ const Card = ({ adData }) => {
 
                         <button
                             onClick={() => setShowApply(true)}
+                            className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black disabled:opacity-50'
+                            disabled={alreadyApplied}
+                        >
+                            {alreadyApplied ? 'Aplicado' : 'Aplicar'}
                             className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
                             Aplicar
                         </button>
