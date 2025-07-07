@@ -38,6 +38,9 @@ const Card = ({ adData }) => {
         const success = await applyToAd(adData.id, { ...info, userId: user.uid }, adData.approvalRequired);
         if (success && !adData.approvalRequired) {
             setParty(prev => [...prev, { ...info, userId: user.uid }]);
+        await applyToAd(adData.id, info, adData.approvalRequired);
+        if (!adData.approvalRequired) {
+            setParty(prev => [...prev, info]);
         }
         setShowApply(false);
     };
@@ -97,6 +100,8 @@ const Card = ({ adData }) => {
                             disabled={alreadyApplied}
                         >
                             {alreadyApplied ? 'Aplicado' : 'Aplicar'}
+                            className='w-full h-[30px] rounded-[8px] bg-[#A8C090] mt-auto text-black'>
+                            Aplicar
                         </button>
                         {showApply && (
                             <CharPopup onSubmit={handleApply} onClose={() => setShowApply(false)} />
