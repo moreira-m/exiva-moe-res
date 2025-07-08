@@ -7,7 +7,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
     useOutsideClick(ref, onClose);
 
     return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-[color:theme('colors.black')] bg-opacity-50 flex items-center justify-center z-50">
         <div ref={ref} className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
             <button
                 onClick={onClose}
@@ -15,7 +15,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             >
                 &times;
             </button>
-            <h2 className="text-lg font-bold mb-2 text-center">Participantes</h2>
+            <h2 className="text-lg font-bold mb-2 text-center text-[card-bg]">Participantes</h2>
             <ul className="flex flex-col gap-2 max-h-60 overflow-y-auto">
                 {party.map((p, idx) => (
                     <li key={idx} className="flex items-center gap-2">
@@ -44,7 +44,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             ) : (
                 <button
                     onClick={onApply}
-                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
+                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-accent-green'}`}
                 >
                     {alreadyApplied ? 'Remover' : 'Aplicar'}
                 </button>

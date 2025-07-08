@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: theme('colors.text-default');
+  background-color: theme('colors.dark-bg');
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,11 +20,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: theme('colors.link');
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: theme('colors.link-hover');
 }
 
 body {
@@ -44,12 +45,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: theme('colors.button-dark-bg');
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: theme('colors.link');
 }
 button:focus,
 button:focus-visible {
@@ -58,13 +59,13 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: theme('colors.text-dark');
+    background-color: theme('colors.bg-light');
   }
   a:hover {
-    color: #747bff;
+    color: theme('colors.link-light-hover');
   }
   button {
-    background-color: #f9f9f9;
+    background-color: theme('colors.button-light-bg');
   }
 }

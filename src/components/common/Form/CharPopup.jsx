@@ -35,7 +35,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     useOutsideClick(ref, onClose);
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[color:theme('colors.black')] bg-opacity-50 flex items-center justify-center z-50">
             <form ref={ref} onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm text-black flex flex-col gap-4">
                 <h2 className="text-lg font-bold text-center">Informações do personagem</h2>
                 <input
@@ -47,7 +47,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
                 {error && <span className="text-red-600 text-sm">{error}</span>}
                 <div className="flex justify-end gap-2">
                     <button type="button" onClick={onClose} className="px-3 py-1 border rounded">Cancelar</button>
-                    <button type="submit" disabled={loading} className="px-3 py-1 bg-[#A8C090] rounded">
+                    <button type="submit" disabled={loading} className="px-3 py-1 bg-accent-green rounded">
                         {loading ? 'Buscando...' : submitLabel}
                     </button>
                 </div>
