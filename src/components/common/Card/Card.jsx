@@ -4,7 +4,7 @@ import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
 import SearchIconCards from '../../../assets/search-icon-cards.svg?react';
 import DetailsPopup from './DetailsPopup';
 import CharPopup from '../Form/CharPopup';
-import { applyToAd, removeApplication } from '../../../firebase/firestoreService';
+import { applyToAd, removeApplication, deleteAd } from '../../../firebase/firestoreService';
 import { AuthContext } from '../../../context/AuthContext';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
 
@@ -20,7 +20,7 @@ const roleIcons = {
     Monk: '/roles/monk-front.png',
 };
 
-const Card = ({ adData }) => {
+const Card = ({ adData, onDelete }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [showApply, setShowApply] = useState(false);
     const [party, setParty] = useState(adData.party || []);
@@ -59,6 +59,16 @@ const Card = ({ adData }) => {
         if (success) {
             setParty(prev => prev.filter(p => p.userId !== user.uid));
             setPending(prev => prev.filter(p => p.userId !== user.uid));
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!user) return;
+        const confirmDelete = window.confirm('Excluir este anúncio?');
+        if (!confirmDelete) return;
+        const success = await deleteAd(adData.id);
+        if (success) {
+            onDelete && onDelete(adData.id);
         }
     };
 
@@ -120,6 +130,8 @@ const Card = ({ adData }) => {
                                     }
                                 }}
                                 alreadyApplied={alreadyApplied}
+                                isOwner={isOwner}
+                                onDelete={handleDelete}
                             />
                         )}
 
