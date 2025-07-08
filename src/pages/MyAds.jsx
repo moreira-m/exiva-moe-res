@@ -31,7 +31,7 @@ const MyAds = () => {
                 <div key={ad.id} className="flex flex-col gap-2">
                     <Card adData={ad} onDelete={(id) => setAds(prev => prev.filter(a => a.id !== id))} />
                     {ad.pending && ad.pending.length > 0 && (
-                        <div className="bg-[var(--c-card-bg)] p-2 rounded text-[var(--c-white)]">
+                        <div className="bg-card-bg p-2 rounded text-white">
                             <h3 className="font-bold">Solicitações</h3>
                             {ad.pending.map(p => (
                                 <div key={p.userId} className="flex justify-between items-center">
@@ -45,7 +45,7 @@ const MyAds = () => {
                                     </span>
                                     <div className="flex gap-2">
                                         <button className="px-2 bg-green-600 rounded" onClick={() => handleDecision(ad.id, p.userId, true)}>Aceitar</button>
-                                        <button className="px-2 bg-[var(--c-red-600)] rounded" onClick={() => handleDecision(ad.id, p.userId, false)}>Recusar</button>
+                                        <button className="px-2 bg-red-600 rounded" onClick={() => handleDecision(ad.id, p.userId, false)}>Recusar</button>
                                     </div>
                                 </div>
                             ))}
@@ -53,7 +53,7 @@ const MyAds = () => {
                     )}
                 </div>
             ))}
-            {ads.length === 0 && <p className="text-[var(--c-white)]">Nenhum anúncio</p>}
+            {ads.length === 0 && <p className="text-white">Nenhum anúncio</p>}
         </div>
     );
 };

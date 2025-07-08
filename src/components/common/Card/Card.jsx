@@ -67,7 +67,7 @@ const Card = ({ adData, onDelete }) => {
     };
 
     return (
-        <div className='bg-[var(--c-card-bg)] w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
+        <div className='bg-card-bg w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
 
             {/* Estrela de favoritar */}
             <button
@@ -78,7 +78,7 @@ const Card = ({ adData, onDelete }) => {
             </button>
 
             {/* Imagem da criatura */}
-            <div className='w-[130px] h-[130px] flex-shrink-0 rounded-[8px] bg-[var(--c-accent)] m-0 h-full'>
+            <div className='w-[130px] h-[130px] flex-shrink-0 rounded-[8px] bg-accent m-0 h-full'>
                 <img src={adData.soulcoreImage} alt={adData.soulCoreName} className="w-full h-full object-contain" />
             </div>
 
@@ -87,13 +87,13 @@ const Card = ({ adData, onDelete }) => {
             <div className='flex flex-col w-full'>
                 <div className='flex flex-col justify-between gap-4'>
                     <div className='border-b border-white mt-3'>
-                        <h2 className='text-left text-[var(--c-white)] font-bold text-xl text-[30px]'>
+                        <h2 className='text-left text-white font-bold text-xl text-[30px]'>
                             {adData.soulCoreName}
                         </h2>
                     </div>
                     <div className='flex flex-row gap-2'>
                         <img src={crystalCoinIcon} alt="Crystal Coin" />
-                        <p className='text-[var(--c-white)] mt-auto mb-auto'>{adData.value}</p>
+                        <p className='text-white mt-auto mb-auto'>{adData.value}</p>
                     </div>
                     <div className='flex flex-row gap-2 h-[45px]'>
                         {party.map((p, idx) => (
@@ -130,13 +130,13 @@ const Card = ({ adData, onDelete }) => {
                         )}
 
                         {isOwner ? (
-                            <div className="w-full h-[30px] rounded-[8px] mt-auto bg-[var(--c-accent)] text-[var(--c-white)] flex items-center justify-center">
+                            <div className="w-full h-[30px] rounded-[8px] mt-auto bg-accent text-white flex items-center justify-center">
                                 Líder
                             </div>
                         ) : (
                             <button
                                 onClick={alreadyApplied ? handleRemove : () => setShowApply(true)}
-                                className={`w-full h-[30px] rounded-[8px] mt-auto text-[var(--c-black)] ${alreadyApplied ? 'bg-[var(--c-red-600)]' : 'bg-[var(--c-accent-green)]'}`}
+                                className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-accent-green'}`}
                             >
                                 {alreadyApplied ? 'Remover' : 'Aplicar'}
                             </button>

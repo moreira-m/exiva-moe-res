@@ -5,7 +5,7 @@
 #root {
   margin: 0 auto;
   text-align: center;
-  background-color: var(--c-app-bg);
+  background-color: theme('colors.app-bg');
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,10 +18,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em var(--c-link-alpha));
+  filter: drop-shadow(0 0 2em theme('colors.link-alpha'));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em var(--c-react-blue-alpha));
+  filter: drop-shadow(0 0 2em theme('colors.react-blue-alpha'));
 }
 
 @keyframes logo-spin {
@@ -44,11 +44,11 @@
 }
 
 .read-the-docs {
-  color: var(--c-gray-dark);
+  color: theme('colors.gray-dark');
 }
 
 p, h1, h2, h3 {
-  color: var(--c-white);
+  color: theme('colors.white');
 }
 
 h1 {

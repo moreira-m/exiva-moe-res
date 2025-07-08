@@ -100,11 +100,11 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
 
     const customStyles = {
         option: (provided) => ({ ...provided, color: 'black' }),
-        control: (provided) => ({ ...provided, backgroundColor: 'var(--c-white)', border: '1px solid var(--c-gray-light)' }),
+        control: (provided) => ({ ...provided, backgroundColor: 'white', border: '1px solid #ccc' }),
     };
 
     return (
-        <form onSubmit={handleSubmit} className="text-[var(--c-white)] bg-[var(--c-card-bg)] rounded-b-lg flex flex-row gap-4 justify-center p-4">
+        <form onSubmit={handleSubmit} className="text-white bg-card-bg rounded-b-lg flex flex-row gap-4 justify-center p-4">
             <div>
                 <Select 
                     options={worlds.map(w => ({ label: w, value: w }))}
@@ -148,7 +148,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
                     placeholder="Ex: 50000"
                     min="0"
                     step="1"
-                    className="w-full p-2 rounded text-[var(--c-black)]"
+                    className="w-full p-2 rounded text-black"
                 />
             </div>
             <div className="flex items-center gap-2">
@@ -162,7 +162,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
             </div>
             <button
                 type="submit"
-                className="h-[38px] px-4 rounded bg-[var(--c-accent-green)] font-bold"
+                className="h-[38px] px-4 rounded bg-accent-green font-bold"
             >
                 Criar Anúncio
             </button>

@@ -28,18 +28,18 @@ const LoginPopup = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-[color:var(--c-black)] bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-[var(--c-white)] rounded-lg shadow-lg p-8 w-full max-w-sm relative">
+        <div className="fixed inset-0 bg-[color:theme('colors.black')] bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative">
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 text-[var(--c-gray-600)] hover:text-[var(--c-gray-900)] text-xl"
+                    className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"
                 >
                     &times;
                 </button>
-                <h2 className="text-2xl font-semibold mb-4 text-center text-[var(--c-surface)]">Login</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-center text-surface">Login</h2>
 
                 <div className="text-center flex flex-col gap-4">
-                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-[var(--c-gray-100)] transition'>
+                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-gray-100 transition'>
                         <img
                             src={googleIcon}
                             className='w-[33px] h-[33px]'
@@ -51,7 +51,7 @@ const LoginPopup = ({ onClose }) => {
                             Entrar com Google
                         </button>
                     </div>
-                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-[var(--c-gray-100)] transition'>
+                    <div className='flex flex-row border rounded justify-center p-2 hover:bg-gray-100 transition'>
                         <img
                             src={facebookIcon}
                             className='w-[33x] h-[33px]'

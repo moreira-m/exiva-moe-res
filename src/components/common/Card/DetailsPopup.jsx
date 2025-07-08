@@ -7,11 +7,11 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
     useOutsideClick(ref, onClose);
 
     return (
-    <div className="fixed inset-0 bg-[color:var(--c-black)] bg-opacity-50 flex items-center justify-center z-50">
-        <div ref={ref} className="bg-[var(--c-white)] rounded-lg shadow-lg p-4 text-[var(--c-black)] relative w-full max-w-sm">
+    <div className="fixed inset-0 bg-[color:theme('colors.black')] bg-opacity-50 flex items-center justify-center z-50">
+        <div ref={ref} className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
             <button
                 onClick={onClose}
-                className="absolute top-2 right-2 text-[var(--c-gray-600)] hover:text-[var(--c-gray-900)] text-xl"
+                className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"
             >
                 &times;
             </button>
@@ -21,7 +21,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
                     <li key={idx} className="flex items-center gap-2">
                         <img src={getRoleIcon(p.vocation)} alt={p.vocation} className="w-8 h-8" />
                         {p.url ? (
-                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-[var(--c-blue-600)] underline">
+                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
                                 {p.name}
                             </a>
                         ) : (
@@ -37,14 +37,14 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             {isOwner ? (
                 <button
                     onClick={onDelete}
-                    className="mt-4 w-full h-[30px] rounded-[8px] bg-[var(--c-red-600)] text-[var(--c-white)]"
+                    className="mt-4 w-full h-[30px] rounded-[8px] bg-red-600 text-white"
                 >
                     Excluir Anúncio
                 </button>
             ) : (
                 <button
                     onClick={onApply}
-                    className={`mt-4 w-full h-[30px] rounded-[8px] text-[var(--c-black)] ${alreadyApplied ? 'bg-[var(--c-red-600)]' : 'bg-[var(--c-accent-green)]'}`}
+                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-accent-green'}`}
                 >
                     {alreadyApplied ? 'Remover' : 'Aplicar'}
                 </button>

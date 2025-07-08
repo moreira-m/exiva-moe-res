@@ -107,12 +107,12 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     };
 
     const baseStyle = "py-2 px-6 font-bold transition-all duration-300";
-    const activeStyle = "bg-[var(--c-accent)] text-[var(--c-white)] rounded-md";
-    const inactiveStyle = "bg-transparent text-[var(--c-gray-400)]";
+    const activeStyle = "bg-accent text-white rounded-md";
+    const inactiveStyle = "bg-transparent text-gray-400";
 
     return (
         <div className="w-full">
-            <div className="bg-[var(--c-card-bg)] p-2 rounded-lg flex justify-center gap-2">
+            <div className="bg-card-bg p-2 rounded-lg flex justify-center gap-2">
                 <button
                     onClick={() => toggleMode('filter')}
                     className={`${baseStyle} ${activeMode === 'filter' ? activeStyle : inactiveStyle}`}
@@ -129,7 +129,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
 
             <div className="w-full mt-1">
                 {activeMode === 'filter' && (
-                    <div className="bg-[var(--c-card-bg)] p-4 rounded-b-lg flex flex-row gap-4 justify-center">
+                    <div className="bg-card-bg p-4 rounded-b-lg flex flex-row gap-4 justify-center">
                         <Select
                             className="min-w-[180px] w-fit"
                             options={mundos.map(w => ({ label: w, value: w }))}
