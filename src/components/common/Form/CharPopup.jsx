@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-
-const vocationMap = {
-    'Elite Knight': 'Knight',
-    'Master Sorcerer': 'Sorcerer',
-    'Royal Paladin': 'Paladin',
-    'Elder Druid': 'Druid',
-    'Exalted Monk': 'Monk',
-};
+import { vocationMap } from '../../../utils/vocations.js';
 
 const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [name, setName] = useState('');
