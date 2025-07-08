@@ -1,12 +1,5 @@
 import React from 'react';
-
-const roleIcons = {
-    Sorcerer: '/roles/sorcerer-front.png',
-    Druid: '/roles/druid-front.png',
-    Knight: '/roles/knight-front.png',
-    Paladin: '/roles/paladin-front.png',
-    Monk: '/roles/monk-front.png',
-};
+import { getRoleIcon } from '../../../utils/vocations.js';
 
 const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDelete }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -21,8 +14,14 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             <ul className="flex flex-col gap-2 max-h-60 overflow-y-auto">
                 {party.map((p, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                        <img src={roleIcons[p.vocation]} alt={p.vocation} className="w-8 h-8" />
-                        <span>{p.name}</span>
+                        <img src={getRoleIcon(p.vocation)} alt={p.vocation} className="w-8 h-8" />
+                        {p.url ? (
+                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                                {p.name}
+                            </a>
+                        ) : (
+                            <span>{p.name}</span>
+                        )}
                         <span className="ml-auto">lvl {p.level}</span>
                     </li>
                 ))}

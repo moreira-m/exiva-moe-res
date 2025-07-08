@@ -35,7 +35,14 @@ const MyAds = () => {
                             <h3 className="font-bold">Solicitações</h3>
                             {ad.pending.map(p => (
                                 <div key={p.userId} className="flex justify-between items-center">
-                                    <span>{p.name} - {p.vocation} - lvl {p.level}</span>
+                                    <span>
+                                        {p.url ? (
+                                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="underline">
+                                                {p.name}
+                                            </a>
+                                        ) : p.name}
+                                        {' - '}{p.vocation} - lvl {p.level}
+                                    </span>
                                     <div className="flex gap-2">
                                         <button className="px-2 bg-green-600 rounded" onClick={() => handleDecision(ad.id, p.userId, true)}>Aceitar</button>
                                         <button className="px-2 bg-red-600 rounded" onClick={() => handleDecision(ad.id, p.userId, false)}>Recusar</button>
