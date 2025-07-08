@@ -22,7 +22,13 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
                 {party.map((p, idx) => (
                     <li key={idx} className="flex items-center gap-2">
                         <img src={roleIcons[p.vocation]} alt={p.vocation} className="w-8 h-8" />
-                        <span>{p.name}</span>
+                        {p.url ? (
+                            <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                                {p.name}
+                            </a>
+                        ) : (
+                            <span>{p.name}</span>
+                        )}
                         <span className="ml-auto">lvl {p.level}</span>
                     </li>
                 ))}
