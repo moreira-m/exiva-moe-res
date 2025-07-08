@@ -148,7 +148,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
                     placeholder="Ex: 50000"
                     min="0"
                     step="1"
-                    className="w-full p-2 rounded text-black"
+                    className="w-full p-2 rounded text-black bg-white"
                 />
             </div>
             <div className="flex items-center gap-2">

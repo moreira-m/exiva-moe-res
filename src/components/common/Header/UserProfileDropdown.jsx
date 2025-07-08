@@ -9,7 +9,7 @@ const UserProfileDropdown = ({ user, onLogout, onClose }) => {
   if (!user) return null;
 
   return (
-    <div ref={ref} className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+    <div ref={ref} className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50 flex flex-col gap-1">
       <p className="px-4 py-2 font-bold text-surface border-b border-gray-200 truncate">
         {user.displayName || user.email}
       </p>
@@ -29,7 +29,7 @@ const UserProfileDropdown = ({ user, onLogout, onClose }) => {
       </Link>
       <button
         onClick={onLogout}
-        className="block w-full text-left px-4 py-2 text-white text-center border-2 border-solid w-fit mx-auto rounded-lg transition-all duration-500 bg-accent hover:bg-white hover:transition-all hover:duration-500 hover:text-accent hover:border-2 hover:border-transparent"
+        className="block w-fit text-left px-4 py-2 text-white text-center border-2 border-solid w-fit mx-auto rounded-md transition-all duration-500 bg-accent hover:bg-white hover:transition-all hover:duration-500 hover:text-accent hover:border-2 hover:border-transparent"
       >
         Logout
       </button>

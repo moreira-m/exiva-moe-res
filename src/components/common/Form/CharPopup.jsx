@@ -35,11 +35,11 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     useOutsideClick(ref, onClose);
 
     return (
-        <div className="fixed inset-0 bg-[color:theme('colors.black')] bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <form ref={ref} onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm text-black flex flex-col gap-4">
-                <h2 className="text-lg font-bold text-center">Informações do personagem</h2>
+                <h2 className="text-lg font-bold text-center text-gray-400">Informações do personagem</h2>
                 <input
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-white"
                     placeholder="Nome do char"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
