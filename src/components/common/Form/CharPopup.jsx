@@ -1,19 +1,36 @@
 import React, { useState, useRef } from 'react';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-
-const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
+import { vocationMap } from '../../../utils/vocations.js';
 
 const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [name, setName] = useState('');
-    const [level, setLevel] = useState('');
-    const [vocation, setVocation] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const popupRef = useRef(null);
     useOnClickOutside(popupRef, onClose);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !level || !vocation) return;
-        onSubmit({ name, level, vocation });
+        if (!name) return;
+        setLoading(true);
+        setError('');
+        try {
+            const response = await fetch(`https://api.tibiadata.com/v4/character/${encodeURIComponent(name)}`);
+            const data = await response.json();
+            const char = data?.character?.character;
+            if (!char) {
+                setError('Personagem não encontrado');
+                setLoading(false);
+                return;
+            }
+            const url = data?.information?.tibia_urls?.[0] || '';
+            const vocation = vocationMap[char.vocation] || char.vocation;
+            onSubmit({ name: char.name, level: char.level, vocation, url });
+        } catch (err) {
+            console.error('Erro ao buscar personagem:', err);
+            setError('Erro ao buscar personagem');
+        }
+        setLoading(false);
     };
 
     return (
@@ -26,26 +43,12 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <input
-                    className="border p-2 rounded"
-                    placeholder="Level"
-                    type="number"
-                    value={level}
-                    onChange={(e) => setLevel(e.target.value)}
-                />
-                <select
-                    className="border p-2 rounded"
-                    value={vocation}
-                    onChange={(e) => setVocation(e.target.value)}
-                >
-                    <option value="">Selecione a vocação</option>
-                    {vocations.map(v => (
-                        <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>
+                {error && <span className="text-red-600 text-sm">{error}</span>}
                 <div className="flex justify-end gap-2">
                     <button type="button" onClick={onClose} className="px-3 py-1 border rounded">Cancelar</button>
-                    <button type="submit" className="px-3 py-1 bg-[#A8C090] rounded">{submitLabel}</button>
+                    <button type="submit" disabled={loading} className="px-3 py-1 bg-[#A8C090] rounded">
+                        {loading ? 'Buscando...' : submitLabel}
+                    </button>
                 </div>
             </form>
         </div>

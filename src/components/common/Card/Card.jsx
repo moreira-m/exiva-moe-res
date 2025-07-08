@@ -4,6 +4,7 @@ import MarkStarIcon from '../../../assets/mark-star-icon.svg?react';
 import SearchIconCards from '../../../assets/search-icon-cards.svg?react';
 import DetailsPopup from './DetailsPopup';
 import CharPopup from '../Form/CharPopup';
+import { getRoleIcon } from '../../../utils/vocations.js';
 import { applyToAd, removeApplication, deleteAd } from '../../../firebase/firestoreService';
 import { AuthContext } from '../../../context/AuthContext';
 // import tilesBossIcon from '../../../assets/tiles-icon.png'
@@ -12,13 +13,6 @@ const handleFavoriteClick = () => {
 
 };
 
-const roleIcons = {
-    Sorcerer: '/roles/sorcerer-front.png',
-    Druid: '/roles/druid-front.png',
-    Knight: '/roles/knight-front.png',
-    Paladin: '/roles/paladin-front.png',
-    Monk: '/roles/monk-front.png',
-};
 
 const Card = ({ adData, onDelete }) => {
     const [showPopup, setShowPopup] = useState(false);
@@ -101,11 +95,11 @@ const Card = ({ adData, onDelete }) => {
                         <img src={crystalCoinIcon} alt="Crystal Coin" />
                         <p className='text-white mt-auto mb-auto'>{adData.value}</p>
                     </div>
-                    <div className='flex flex-row gap-2'>
+                    <div className='flex flex-row gap-2 h-[45px]'>
                         {party.map((p, idx) => (
                             <img
                                 key={idx}
-                                src={roleIcons[p.vocation]}
+                                src={getRoleIcon(p.vocation)}
                                 alt=''
                                 className='w-[45px] h-[45px]'
                             />

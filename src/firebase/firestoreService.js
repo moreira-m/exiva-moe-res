@@ -50,9 +50,18 @@ export const applyToAd = async (adId, charInfo, approvalRequired) => {
         if (!snap.exists()) return false;
         const data = snap.data();
         const existing = [...(data.party || []), ...(data.pending || [])];
-        if (existing.some(p => p.userId === charInfo.userId)) {
+
+        // Impede inscrições duplicadas para o mesmo personagem ou usuário
+        if (existing.some(p => p.userId === charInfo.userId ||
+            (p.name && charInfo.name && p.name.toLowerCase() === charInfo.name.toLowerCase()))) {
             return false;
         }
+
+        // Limite máximo de 5 jogadores por soulcore (incluindo pendentes)
+        if (existing.length >= 5) {
+            return false;
+        }
+
         const field = approvalRequired ? 'pending' : 'party';
         await updateDoc(docRef, {
             [field]: arrayUnion(charInfo)
