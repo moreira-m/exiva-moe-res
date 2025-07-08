@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
 
-const CharPopup = ({ onSubmit, onClose }) => {
+const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [name, setName] = useState('');
     const [level, setLevel] = useState('');
     const [vocation, setVocation] = useState('');
@@ -42,7 +42,7 @@ const CharPopup = ({ onSubmit, onClose }) => {
                 </select>
                 <div className="flex justify-end gap-2">
                     <button type="button" onClick={onClose} className="px-3 py-1 border rounded">Cancelar</button>
-                    <button type="submit" className="px-3 py-1 bg-[#A8C090] rounded">Confirmar</button>
+                    <button type="submit" className="px-3 py-1 bg-[#A8C090] rounded">{submitLabel}</button>
                 </div>
             </form>
         </div>

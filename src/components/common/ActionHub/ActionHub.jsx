@@ -3,6 +3,7 @@ import Select from 'react-select';
 import Form from '../Form/Form';
 import { AuthContext } from '../../../context/AuthContext';
 import CharPopup from '../Form/CharPopup';
+import { createAd } from '../../../firebase/firestoreService';
 
 const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [activeMode, setActiveMode] = useState('filter');
@@ -12,6 +13,7 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     const [selectedWorld, setSelectedWorld] = useState('');
     const [charInfo, setCharInfo] = useState(null);
     const [showCharPopup, setShowCharPopup] = useState(false);
+    const [pendingAd, setPendingAd] = useState(null);
     const { user, login } = useContext(AuthContext);
     
 
@@ -84,7 +86,21 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
         setCharInfo(null);
     };
 
-    const handleCharSubmit = (info) => {
+    const handleCharSubmit = async (info) => {
+        if (pendingAd) {
+            const newAd = {
+                ...pendingAd,
+                userId: user.uid,
+                party: [{ ...info, userId: user.uid }],
+                pending: [],
+            };
+            const docId = await createAd(newAd);
+            const adWithId = { ...newAd, id: docId };
+            handleCreateAd(adWithId);
+            setPendingAd(null);
+            setShowCharPopup(false);
+            return;
+        }
         setCharInfo(info);
         setShowCharPopup(false);
         setActiveMode('create');
@@ -144,12 +160,16 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
                             onCreateAd={handleCreateAd}
                             onWorldSelect={(world) => onFilterChange({ boss: '', world })}
                             charInfo={charInfo}
-                            onCharInfoRequest={() => setShowCharPopup(true)}
+                            onCharInfoRequest={(data) => { setPendingAd(data); setShowCharPopup(true); }}
                         />
                     </div>
                 )}
                 {showCharPopup && (
-                    <CharPopup onSubmit={handleCharSubmit} onClose={() => setShowCharPopup(false)} />
+                    <CharPopup
+                        onSubmit={handleCharSubmit}
+                        onClose={() => setShowCharPopup(false)}
+                        submitLabel={pendingAd ? 'Anunciar Vaga' : undefined}
+                    />
                 )}
             </div>
         </div>

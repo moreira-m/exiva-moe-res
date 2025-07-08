@@ -28,6 +28,7 @@ const Card = ({ adData }) => {
     const { user } = useContext(AuthContext);
     const alreadyApplied =
         [...party, ...pending].some(p => p.userId === user?.uid);
+    const isOwner = adData.userId === user?.uid;
 
     const handleSearchClick = () => {
         setShowPopup(true);
@@ -122,12 +123,18 @@ const Card = ({ adData }) => {
                             />
                         )}
 
-                        <button
-                            onClick={alreadyApplied ? handleRemove : () => setShowApply(true)}
-                            className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
-                        >
-                            {alreadyApplied ? 'Remover' : 'Aplicar'}
-                        </button>
+                        {isOwner ? (
+                            <div className="w-full h-[30px] rounded-[8px] mt-auto bg-[#BF6370] text-white flex items-center justify-center">
+                                Líder
+                            </div>
+                        ) : (
+                            <button
+                                onClick={alreadyApplied ? handleRemove : () => setShowApply(true)}
+                                className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
+                            >
+                                {alreadyApplied ? 'Remover' : 'Aplicar'}
+                            </button>
+                        )}
                         {showApply && (
                             <CharPopup onSubmit={handleApply} onClose={() => setShowApply(false)} />
                         )}
