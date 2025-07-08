@@ -26,7 +26,7 @@ const MyAds = () => {
     };
 
     return (
-        <div className="flex flex-col items-center gap-4 mt-6">
+        <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-start min-h-screen content-start px-[50px]">
             {ads.map(ad => (
                 <div key={ad.id} className="flex flex-col gap-2">
                     <Card adData={ad} onDelete={(id) => setAds(prev => prev.filter(a => a.id !== id))} />

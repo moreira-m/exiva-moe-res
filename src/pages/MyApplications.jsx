@@ -20,7 +20,7 @@ const MyApplications = () => {
     }, [user]);
 
     return (
-        <div className="flex flex-col items-center gap-4 mt-6">
+        <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-start min-h-screen content-start px-[50px]">
             {ads.map(ad => (
                 <Card key={ad.id} adData={ad} />
             ))}
