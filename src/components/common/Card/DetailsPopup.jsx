@@ -15,7 +15,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             >
                 &times;
             </button>
-            <h2 className="text-lg font-bold mb-2 text-center">Participantes</h2>
+            <h2 className="text-lg font-bold mb-2 text-center text-[card-bg]">Participantes</h2>
             <ul className="flex flex-col gap-2 max-h-60 overflow-y-auto">
                 {party.map((p, idx) => (
                     <li key={idx} className="flex items-center gap-2">
