@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 
+const vocationMap = {
+    'Elite Knight': 'Knight',
+    'Master Sorcerer': 'Sorcerer',
+    'Royal Paladin': 'Paladin',
+    'Elder Druid': 'Druid',
+    'Exalted Monk': 'Monk',
+};
+
 const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(false);
@@ -20,7 +28,8 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
                 return;
             }
             const url = data?.information?.tibia_urls?.[0] || '';
-            onSubmit({ name: char.name, level: char.level, vocation: char.vocation, url });
+            const vocation = vocationMap[char.vocation] || char.vocation;
+            onSubmit({ name: char.name, level: char.level, vocation, url });
         } catch (err) {
             console.error('Erro ao buscar personagem:', err);
             setError('Erro ao buscar personagem');

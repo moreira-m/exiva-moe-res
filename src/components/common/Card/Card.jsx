@@ -14,10 +14,15 @@ const handleFavoriteClick = () => {
 
 const roleIcons = {
     Sorcerer: '/roles/sorcerer-front.png',
+    'Master Sorcerer': '/roles/sorcerer-front.png',
     Druid: '/roles/druid-front.png',
+    'Elder Druid': '/roles/druid-front.png',
     Knight: '/roles/knight-front.png',
+    'Elite Knight': '/roles/knight-front.png',
     Paladin: '/roles/paladin-front.png',
+    'Royal Paladin': '/roles/paladin-front.png',
     Monk: '/roles/monk-front.png',
+    'Exalted Monk': '/roles/monk-front.png',
 };
 
 const Card = ({ adData, onDelete }) => {
