@@ -24,7 +24,7 @@ const MyApplications = () => {
             {ads.map(ad => (
                 <Card key={ad.id} adData={ad} />
             ))}
-            {ads.length === 0 && <p className="text-white">Nenhuma aplicação</p>}
+            {ads.length === 0 && <p className="text-[var(--c-white)]">Nenhuma aplicação</p>}
         </div>
     );
 };

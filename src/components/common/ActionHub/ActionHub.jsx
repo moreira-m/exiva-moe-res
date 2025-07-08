@@ -107,8 +107,8 @@ const ActionHub = ({ onCreateAd, onFilterChange }) => {
     };
 
     const baseStyle = "py-2 px-6 font-bold transition-all duration-300";
-    const activeStyle = "bg-[var(--c-accent)] text-white rounded-md";
-    const inactiveStyle = "bg-transparent text-gray-400";
+    const activeStyle = "bg-[var(--c-accent)] text-[var(--c-white)] rounded-md";
+    const inactiveStyle = "bg-transparent text-[var(--c-gray-400)]";
 
     return (
         <div className="w-full">

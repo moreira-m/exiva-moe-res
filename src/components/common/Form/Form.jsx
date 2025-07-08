@@ -104,7 +104,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="text-white bg-[var(--c-card-bg)] rounded-b-lg flex flex-row gap-4 justify-center p-4">
+        <form onSubmit={handleSubmit} className="text-[var(--c-white)] bg-[var(--c-card-bg)] rounded-b-lg flex flex-row gap-4 justify-center p-4">
             <div>
                 <Select 
                     options={worlds.map(w => ({ label: w, value: w }))}
@@ -148,7 +148,7 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
                     placeholder="Ex: 50000"
                     min="0"
                     step="1"
-                    className="w-full p-2 rounded text-black"
+                    className="w-full p-2 rounded text-[var(--c-black)]"
                 />
             </div>
             <div className="flex items-center gap-2">

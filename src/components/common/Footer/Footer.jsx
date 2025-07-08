@@ -14,10 +14,10 @@ const Footer = ({ }) => {
 
             {/* second */}
             <div className='flex flex-row gap-4'>
-                <button className='text-white text-[11px] hover:text-[var(--c-gray)] hover:underline transition'>
+                <button className='text-[var(--c-white)] text-[11px] hover:text-[var(--c-gray)] hover:underline transition'>
                     Login
                 </button>
-                <button className='text-white text-[11px] hover:text-[var(--c-gray)] hover:underline transition'>
+                <button className='text-[var(--c-white)] text-[11px] hover:text-[var(--c-gray)] hover:underline transition'>
                     Sobre
                 </button>
             </div>

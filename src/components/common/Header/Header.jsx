@@ -42,7 +42,7 @@ const Header = ({ children }) => {
             <Link
               key={link.name}
               to={link.path}
-              className={`text-white hover:text-[var(--c-border-main)] transition ${location.pathname === link.path ? 'font-bold underline' : ''
+              className={`text-[var(--c-white)] hover:text-[var(--c-border-main)] transition ${location.pathname === link.path ? 'font-bold underline' : ''
                 }`}
             >
               {link.name}
@@ -52,7 +52,7 @@ const Header = ({ children }) => {
             <div className="relative">
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
-                className="w-8 h-8 rounded-full bg-[var(--c-accent)] text-white flex items-center justify-center font-bold"
+                className="w-8 h-8 rounded-full bg-[var(--c-accent)] text-[var(--c-white)] flex items-center justify-center font-bold"
               >
                 {user.email ? user.email.charAt(0).toUpperCase() : '?'}
               </button>
@@ -67,7 +67,7 @@ const Header = ({ children }) => {
           ) : (
             <button
               onClick={handleLoginClick}
-              className="text-white hover:text-[var(--c-border-main)] transition bg-[var(--c-accent)] px-4 py-2 rounded"
+              className="text-[var(--c-white)] hover:text-[var(--c-border-main)] transition bg-[var(--c-accent)] px-4 py-2 rounded"
             >
               Login
             </button>
@@ -91,7 +91,7 @@ const Header = ({ children }) => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-white hover:text-[var(--c-border-main)] text-lg ${location.pathname === link.path ? 'font-bold underline' : ''
+                className={`text-[var(--c-white)] hover:text-[var(--c-border-main)] text-lg ${location.pathname === link.path ? 'font-bold underline' : ''
                   }`}
                 onClick={() => setMenuOpen(false)}
               >
@@ -102,7 +102,7 @@ const Header = ({ children }) => {
               <div className="relative">
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
-                  className="w-8 h-8 rounded-full bg-[var(--c-accent)] text-white flex items-center justify-center font-bold"
+                  className="w-8 h-8 rounded-full bg-[var(--c-accent)] text-[var(--c-white)] flex items-center justify-center font-bold"
                 >
                   {user.email ? user.email.charAt(0).toUpperCase() : '?'}
                 </button>
@@ -117,7 +117,7 @@ const Header = ({ children }) => {
             ) : (
               <button
                 onClick={handleLoginClick}
-                className="text-white hover:text-[var(--c-border-main)] text-lg"
+                className="text-[var(--c-white)] hover:text-[var(--c-border-main)] text-lg"
               >
                 Login
               </button>

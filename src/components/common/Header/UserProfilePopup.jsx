@@ -9,11 +9,11 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
   if (!user) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div ref={ref} className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative text-center">
+    <div className="fixed inset-0 bg-[color:var(--c-black)] bg-opacity-50 flex justify-center items-center z-50">
+      <div ref={ref} className="bg-[var(--c-white)] rounded-lg shadow-lg p-8 w-full max-w-sm relative text-center">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"
+          className="absolute top-2 right-2 text-[var(--c-gray-600)] hover:text-[var(--c-gray-900)] text-xl"
         >
           &times;
         </button>
@@ -22,7 +22,7 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
           <img src={user.photoURL} alt="avatar" className="w-24 h-24 rounded-full mx-auto mb-4" />
         )}
         <p className="font-bold">{user.displayName || user.email}</p>
-        <p className="text-sm text-gray-500 mb-4">{user.email}</p>
+        <p className="text-sm text-[var(--c-gray-500)] mb-4">{user.email}</p>
         <div className="flex flex-col gap-2 mb-4">
           <Link
             to="/my-ads"
@@ -41,7 +41,7 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
         </div>
         <button
           onClick={onLogout}
-          className="mt-2 bg-[var(--c-accent)] text-white px-4 py-2 rounded w-full hover:bg-[var(--c-accent-hover)] transition"
+          className="mt-2 bg-[var(--c-accent)] text-[var(--c-white)] px-4 py-2 rounded w-full hover:bg-[var(--c-accent-hover)] transition"
         >
           Logout
         </button>

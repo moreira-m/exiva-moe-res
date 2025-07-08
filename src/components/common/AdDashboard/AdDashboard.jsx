@@ -49,7 +49,7 @@ const AdDashboard = () => {
                 }}
             />
 
-            <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">
+            <h1 className="text-4xl font-bold text-center text-[var(--c-white)] mb-8 mt-8">
                 {title}
             </h1>
 

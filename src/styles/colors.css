@@ -19,7 +19,16 @@
   --c-gray-dark: #888;
   --c-white: #ffffff;
   --c-gray-light: #ccc;
+  --c-black: #000000;
+  --c-red-600: #dc2626;
+  --c-gray-100: #f3f4f6;
+  --c-gray-200: #e5e7eb;
+  --c-gray-400: #9ca3af;
+  --c-gray-500: #6b7280;
+  --c-gray-600: #4b5563;
+  --c-gray-900: #111827;
   --c-react-blue: #61dafb;
+  --c-blue-600: #2563eb;
   --c-link-alpha: #646cffaa;
   --c-react-blue-alpha: #61dafbaa;
 }

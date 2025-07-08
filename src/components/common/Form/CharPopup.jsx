@@ -35,8 +35,8 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     useOutsideClick(ref, onClose);
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <form ref={ref} onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm text-black flex flex-col gap-4">
+        <div className="fixed inset-0 bg-[color:var(--c-black)] bg-opacity-50 flex items-center justify-center z-50">
+            <form ref={ref} onSubmit={handleSubmit} className="bg-[var(--c-white)] rounded-lg shadow-lg p-4 w-full max-w-sm text-[var(--c-black)] flex flex-col gap-4">
                 <h2 className="text-lg font-bold text-center">Informações do personagem</h2>
                 <input
                     className="border p-2 rounded"
@@ -44,7 +44,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                {error && <span className="text-red-600 text-sm">{error}</span>}
+                {error && <span className="text-[var(--c-red-600)] text-sm">{error}</span>}
                 <div className="flex justify-end gap-2">
                     <button type="button" onClick={onClose} className="px-3 py-1 border rounded">Cancelar</button>
                     <button type="submit" disabled={loading} className="px-3 py-1 bg-[var(--c-accent-green)] rounded">
