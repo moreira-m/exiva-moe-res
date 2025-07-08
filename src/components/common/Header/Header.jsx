@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import UserProfileDropdown from './UserProfileDropdown';
+import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
 // Navigation links were moved to the user profile popup
 const navLinks = [];
@@ -9,6 +10,9 @@ const navLinks = [];
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useOutsideClick(menuRef, () => setMenuOpen(false));
   const location = useLocation();
   const { user, login, logout } = useContext(AuthContext);
 
@@ -53,7 +57,11 @@ const Header = ({ children }) => {
                 {user.email ? user.email.charAt(0).toUpperCase() : '?'}
               </button>
               {profileOpen && (
-                <UserProfileDropdown user={user} onLogout={handleLogout} />
+                <UserProfileDropdown
+                  user={user}
+                  onLogout={handleLogout}
+                  onClose={() => setProfileOpen(false)}
+                />
               )}
             </div>
           ) : (
@@ -78,7 +86,7 @@ const Header = ({ children }) => {
         </button>
 
         {menuOpen && (
-          <div className="absolute top-[70px] left-0 w-full bg-[#2B2C30] flex flex-col items-center gap-4 py-4 md:hidden z-50 shadow-lg">
+          <div ref={menuRef} className="absolute top-[70px] left-0 w-full bg-[#2B2C30] flex flex-col items-center gap-4 py-4 md:hidden z-50 shadow-lg">
             {navLinks.map(link => (
               <Link
                 key={link.name}
@@ -99,7 +107,11 @@ const Header = ({ children }) => {
                   {user.email ? user.email.charAt(0).toUpperCase() : '?'}
                 </button>
                 {profileOpen && (
-                  <UserProfileDropdown user={user} onLogout={handleLogout} />
+                  <UserProfileDropdown
+                    user={user}
+                    onLogout={handleLogout}
+                    onClose={() => setProfileOpen(false)}
+                  />
                 )}
               </div>
             ) : (
