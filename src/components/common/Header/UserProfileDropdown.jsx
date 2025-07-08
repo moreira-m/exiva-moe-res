@@ -23,7 +23,7 @@ const UserProfileDropdown = ({ user, onLogout }) => {
       </Link>
       <button
         onClick={onLogout}
-        className="block w-full text-left px-4 py-2 text-[#BF6370] hover:bg-gray-100"
+        className="block w-full text-left px-4 py-2 text-white text-center border-2 border-solid w-fit mx-auto rounded-lg transition-all duration-500 bg-[#BF6370] hover:bg-white hover:transition-all hover:duration-500 hover:text-[#BF6370] hover:border-2 hover:border-transparent"
       >
         Logout
       </button>
