@@ -101,7 +101,7 @@ const Card = ({ adData, onDelete }) => {
                         <img src={crystalCoinIcon} alt="Crystal Coin" />
                         <p className='text-white mt-auto mb-auto'>{adData.value}</p>
                     </div>
-                    <div className='flex flex-row gap-2'>
+                    <div className='flex flex-row gap-2 h-[45px]'>
                         {party.map((p, idx) => (
                             <img
                                 key={idx}
