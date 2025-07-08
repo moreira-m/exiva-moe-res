@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from './../../../firebase/firebase';
 import googleIcon from '../../../assets/google-icon.png'
 import facebookIcon from '../../../assets/facebook-icon.png'
 
 const LoginPopup = ({ onClose }) => {
+    const popupRef = useRef(null);
+    useOnClickOutside(popupRef, onClose);
+
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
@@ -29,7 +33,7 @@ const LoginPopup = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative">
+            <div ref={popupRef} className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative">
                 <button
                     onClick={onClose}
                     className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"

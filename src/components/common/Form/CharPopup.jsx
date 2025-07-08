@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 
 const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
 
@@ -6,6 +7,8 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [name, setName] = useState('');
     const [level, setLevel] = useState('');
     const [vocation, setVocation] = useState('');
+    const popupRef = useRef(null);
+    useOnClickOutside(popupRef, onClose);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,7 +18,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm text-black flex flex-col gap-4">
+            <form ref={popupRef} onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm text-black flex flex-col gap-4">
                 <h2 className="text-lg font-bold text-center">Informações do personagem</h2>
                 <input
                     className="border p-2 rounded"
