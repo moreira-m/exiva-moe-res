@@ -6,6 +6,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
     const popupRef = useRef(null);
     useOnClickOutside(popupRef, onClose);
 
+
     return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div ref={popupRef} className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">

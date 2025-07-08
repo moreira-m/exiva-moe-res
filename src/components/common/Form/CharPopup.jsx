@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
+
 import { vocationMap } from '../../../utils/vocations.js';
 
 const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
@@ -7,7 +8,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const popupRef = useRef(null);
-    useOnClickOutside(popupRef, onClose);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
