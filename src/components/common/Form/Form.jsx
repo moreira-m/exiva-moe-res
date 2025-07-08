@@ -5,8 +5,6 @@ import { createAd, getAdsCreateToday } from '../../../firebase/firestoreService'
 import { Timestamp } from "firebase/firestore";
 import { AuthContext } from '../../../context/AuthContext';
 
-const vocations = ['Sorcerer', 'Druid', 'Knight', 'Paladin', 'Monk'];
-
 const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
     const [creatures, setCreatures] = useState([]);
     const [soulCore, setSoulCore] = useState(null);
@@ -67,7 +65,16 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
         }
 
         if (!charInfo) {
-            onCharInfoRequest && onCharInfoRequest();
+            const partialAd = {
+                createdAt: Timestamp.now(),
+                soulCoreName: soulCore.label,
+                soulcoreImage: soulCore.image,
+                value: inputValue || "A combinar",
+                world,
+                userId,
+                approvalRequired: requireApproval,
+            };
+            onCharInfoRequest && onCharInfoRequest(partialAd);
             return;
         }
 
