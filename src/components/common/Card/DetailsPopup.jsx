@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { getRoleIcon } from '../../../utils/vocations.js';
+import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
-const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDelete }) => (
+const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDelete }) => {
+    const ref = useRef(null);
+    useOutsideClick(ref, onClose);
+
+    return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
+        <div ref={ref} className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
             <button
                 onClick={onClose}
                 className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"
@@ -46,7 +51,8 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             )}
         </div>
     </div>
-);
+    );
+};
 
 export default DetailsPopup;
 

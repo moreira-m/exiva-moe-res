@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
 const UserProfilePopup = ({ user, onClose, onLogout }) => {
+  const ref = useRef(null);
+  useOutsideClick(ref, onClose);
+
   if (!user) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative text-center">
+      <div ref={ref} className="bg-white rounded-lg shadow-lg p-8 w-full max-w-sm relative text-center">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl"

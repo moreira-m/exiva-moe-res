@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
-const UserProfileDropdown = ({ user, onLogout }) => {
+const UserProfileDropdown = ({ user, onLogout, onClose }) => {
+  const ref = useRef(null);
+  useOutsideClick(ref, () => onClose && onClose());
+
   if (!user) return null;
 
   return (
-    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+    <div ref={ref} className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
       <p className="px-4 py-2 font-bold text-[#2B2C30] border-b border-gray-200 truncate">
         {user.displayName || user.email}
       </p>
