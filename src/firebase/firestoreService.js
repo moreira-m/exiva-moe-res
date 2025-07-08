@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { collection, addDoc, getDocs, query, where, Timestamp, doc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, Timestamp, doc, updateDoc, arrayUnion, getDoc, deleteDoc } from 'firebase/firestore';
 
 export const createAd = async (adData) => {
     try {
@@ -89,6 +89,17 @@ export const removeApplication = async (adId, userId) => {
         return true;
     } catch (error) {
         console.error('Erro ao remover aplicação:', error);
+        return false;
+    }
+};
+
+export const deleteAd = async (adId) => {
+    try {
+        const docRef = doc(db, 'bossAds', adId);
+        await deleteDoc(docRef);
+        return true;
+    } catch (error) {
+        console.error('Erro ao deletar anúncio:', error);
         return false;
     }
 };

@@ -29,7 +29,7 @@ const MyAds = () => {
         <div className="flex flex-col items-center gap-4 mt-6">
             {ads.map(ad => (
                 <div key={ad.id} className="flex flex-col gap-2">
-                    <Card adData={ad} />
+                    <Card adData={ad} onDelete={(id) => setAds(prev => prev.filter(a => a.id !== id))} />
                     {ad.pending && ad.pending.length > 0 && (
                         <div className="bg-[#453745] p-2 rounded text-white">
                             <h3 className="font-bold">Solicitações</h3>

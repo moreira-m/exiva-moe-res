@@ -8,7 +8,7 @@ const roleIcons = {
     Monk: '/roles/monk-front.png',
 };
 
-const DetailsPopup = ({ party, onClose, onApply, alreadyApplied }) => (
+const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDelete }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg shadow-lg p-4 text-black relative w-full max-w-sm">
             <button
@@ -30,12 +30,21 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied }) => (
                     <li className="text-center text-sm">Nenhum participante</li>
                 )}
             </ul>
-            <button
-                onClick={onApply}
-                className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
-            >
-                {alreadyApplied ? 'Remover' : 'Aplicar'}
-            </button>
+            {isOwner ? (
+                <button
+                    onClick={onDelete}
+                    className="mt-4 w-full h-[30px] rounded-[8px] bg-red-600 text-white"
+                >
+                    Excluir Anúncio
+                </button>
+            ) : (
+                <button
+                    onClick={onApply}
+                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
+                >
+                    {alreadyApplied ? 'Remover' : 'Aplicar'}
+                </button>
+            )}
         </div>
     </div>
 );
