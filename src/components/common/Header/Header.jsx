@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
-import UserProfilePopup from './UserProfilePopup';
+import UserProfileDropdown from './UserProfileDropdown';
 
 // Navigation links were moved to the user profile popup
 const navLinks = [];
@@ -45,12 +45,17 @@ const Header = ({ children }) => {
             </Link>
           ))}
           {user ? (
-            <button
-              onClick={() => setProfileOpen(true)}
-              className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
-            >
-              {user.email ? user.email.charAt(0).toUpperCase() : '?'}
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
+              >
+                {user.email ? user.email.charAt(0).toUpperCase() : '?'}
+              </button>
+              {profileOpen && (
+                <UserProfileDropdown user={user} onLogout={handleLogout} />
+              )}
+            </div>
           ) : (
             <button
               onClick={handleLoginClick}
@@ -86,12 +91,17 @@ const Header = ({ children }) => {
               </Link>
             ))}
             {user ? (
-              <button
-                onClick={() => setProfileOpen(true)}
-                className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
-              >
-                {user.email ? user.email.charAt(0).toUpperCase() : '?'}
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
+                >
+                  {user.email ? user.email.charAt(0).toUpperCase() : '?'}
+                </button>
+                {profileOpen && (
+                  <UserProfileDropdown user={user} onLogout={handleLogout} />
+                )}
+              </div>
             ) : (
               <button
                 onClick={handleLoginClick}
@@ -105,13 +115,6 @@ const Header = ({ children }) => {
         )}
       </div>
 
-      {profileOpen && (
-        <UserProfilePopup
-          user={user}
-          onClose={() => setProfileOpen(false)}
-          onLogout={handleLogout}
-        />
-      )}
     </header>
   );
 };
