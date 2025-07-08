@@ -141,11 +141,13 @@ const Form = ({ onCreateAd, onWorldSelect, charInfo, onCharInfoRequest }) => {
                      Valor pela vaga
                  </label> */}
                 <input
-                    type="text"
+                    type="number"
                     id="value-input"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder="Ex: 500k"
+                    placeholder="Ex: 50000"
+                    min="0"
+                    step="1"
                     className="w-full p-2 rounded text-black"
                 />
             </div>
