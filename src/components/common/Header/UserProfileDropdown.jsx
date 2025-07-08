@@ -15,12 +15,14 @@ const UserProfileDropdown = ({ user, onLogout, onClose }) => {
       </p>
       <Link
         to="/my-ads"
+        onClick={() => onClose && onClose()}
         className="block px-4 py-2 text-[#2B2C30] hover:bg-gray-100"
       >
         Minhas Vagas
       </Link>
       <Link
         to="/my-applications"
+        onClick={() => onClose && onClose()}
         className="block px-4 py-2 text-[#2B2C30] hover:bg-gray-100"
       >
         Minhas Aplicações
