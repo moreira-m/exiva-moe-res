@@ -31,7 +31,7 @@ const MyAds = () => {
                 <div key={ad.id} className="flex flex-col gap-2">
                     <Card adData={ad} onDelete={(id) => setAds(prev => prev.filter(a => a.id !== id))} />
                     {ad.pending && ad.pending.length > 0 && (
-                        <div className="bg-[#453745] p-2 rounded text-white">
+                        <div className="bg-[var(--c-card-bg)] p-2 rounded text-white">
                             <h3 className="font-bold">Solicitações</h3>
                             {ad.pending.map(p => (
                                 <div key={p.userId} className="flex justify-between items-center">

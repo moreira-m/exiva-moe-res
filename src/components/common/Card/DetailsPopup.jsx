@@ -44,7 +44,7 @@ const DetailsPopup = ({ party, onClose, onApply, alreadyApplied, isOwner, onDele
             ) : (
                 <button
                     onClick={onApply}
-                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
+                    className={`mt-4 w-full h-[30px] rounded-[8px] text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[var(--c-accent-green)]'}`}
                 >
                     {alreadyApplied ? 'Remover' : 'Aplicar'}
                 </button>

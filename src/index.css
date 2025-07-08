@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './styles/colors.css';
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--c-text-default);
+  background-color: var(--c-dark-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,11 +21,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--c-link);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--c-link-hover);
 }
 
 body {
@@ -44,12 +46,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--c-button-dark-bg);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--c-link);
 }
 button:focus,
 button:focus-visible {
@@ -58,13 +60,13 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--c-text-dark);
+    background-color: var(--c-bg-light);
   }
   a:hover {
-    color: #747bff;
+    color: var(--c-link-light-hover);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--c-button-light-bg);
   }
 }

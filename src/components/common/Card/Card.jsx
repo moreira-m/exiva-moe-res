@@ -67,7 +67,7 @@ const Card = ({ adData, onDelete }) => {
     };
 
     return (
-        <div className='bg-[#453745] w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
+        <div className='bg-[var(--c-card-bg)] w-[450px] h-auto flex-shrink-0 rounded-lg gap-[20px] flex flex-row p-3 relative max-h-64'>
 
             {/* Estrela de favoritar */}
             <button
@@ -78,7 +78,7 @@ const Card = ({ adData, onDelete }) => {
             </button>
 
             {/* Imagem da criatura */}
-            <div className='w-[130px] h-[130px] flex-shrink-0 rounded-[8px] bg-[#BF6370] m-0 h-full'>
+            <div className='w-[130px] h-[130px] flex-shrink-0 rounded-[8px] bg-[var(--c-accent)] m-0 h-full'>
                 <img src={adData.soulcoreImage} alt={adData.soulCoreName} className="w-full h-full object-contain" />
             </div>
 
@@ -130,13 +130,13 @@ const Card = ({ adData, onDelete }) => {
                         )}
 
                         {isOwner ? (
-                            <div className="w-full h-[30px] rounded-[8px] mt-auto bg-[#BF6370] text-white flex items-center justify-center">
+                            <div className="w-full h-[30px] rounded-[8px] mt-auto bg-[var(--c-accent)] text-white flex items-center justify-center">
                                 Líder
                             </div>
                         ) : (
                             <button
                                 onClick={alreadyApplied ? handleRemove : () => setShowApply(true)}
-                                className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[#A8C090]'}`}
+                                className={`w-full h-[30px] rounded-[8px] mt-auto text-black ${alreadyApplied ? 'bg-red-600' : 'bg-[var(--c-accent-green)]'}`}
                             >
                                 {alreadyApplied ? 'Remover' : 'Aplicar'}
                             </button>

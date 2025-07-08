@@ -17,7 +17,7 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
         >
           &times;
         </button>
-        <h2 className="text-2xl font-semibold mb-4 text-[#2B2C30]">Perfil</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-[var(--c-surface)]">Perfil</h2>
         {user.photoURL && (
           <img src={user.photoURL} alt="avatar" className="w-24 h-24 rounded-full mx-auto mb-4" />
         )}
@@ -27,21 +27,21 @@ const UserProfilePopup = ({ user, onClose, onLogout }) => {
           <Link
             to="/my-ads"
             onClick={onClose}
-            className="text-[#2B2C30] hover:underline"
+            className="text-[var(--c-surface)] hover:underline"
           >
             Minhas Vagas
           </Link>
           <Link
             to="/my-applications"
             onClick={onClose}
-            className="text-[#2B2C30] hover:underline"
+            className="text-[var(--c-surface)] hover:underline"
           >
             Minhas Aplicações
           </Link>
         </div>
         <button
           onClick={onLogout}
-          className="mt-2 bg-[#BF6370] text-white px-4 py-2 rounded w-full hover:bg-[#a94e5b] transition"
+          className="mt-2 bg-[var(--c-accent)] text-white px-4 py-2 rounded w-full hover:bg-[var(--c-accent-hover)] transition"
         >
           Logout
         </button>

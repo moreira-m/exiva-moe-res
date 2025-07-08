@@ -36,7 +36,7 @@ const LoginPopup = ({ onClose }) => {
                 >
                     &times;
                 </button>
-                <h2 className="text-2xl font-semibold mb-4 text-center text-[#2B2C30]">Login</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-center text-[var(--c-surface)]">Login</h2>
 
                 <div className="text-center flex flex-col gap-4">
                     <div className='flex flex-row border rounded justify-center p-2 hover:bg-gray-100 transition'>

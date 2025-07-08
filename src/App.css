@@ -5,7 +5,7 @@
 #root {
   margin: 0 auto;
   text-align: center;
-  background-color: #35313B;
+  background-color: var(--c-app-bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,10 +18,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--c-link-alpha));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--c-react-blue-alpha));
 }
 
 @keyframes logo-spin {
@@ -44,11 +44,11 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--c-gray-dark);
 }
 
 p, h1, h2, h3 {
-  color: #fff;
+  color: var(--c-white);
 }
 
 h1 {

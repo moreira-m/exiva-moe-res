@@ -11,7 +11,7 @@ const LimitPopup = ({ onClose, title, message }) => {
         <div ref={ref} className="bg-white rounded-lg shadow-lg p-4 text-black flex flex-col gap-4 w-full max-w-sm">
             <h2 className="text-lg font-bold text-center">{title || 'Limite atingido'}</h2>
             <p>{message || 'Você atingiu o limite permitido.'}</p>
-            <button onClick={onClose} className="px-3 py-1 bg-[#BF6370] text-white rounded">Fechar</button>
+            <button onClick={onClose} className="px-3 py-1 bg-[var(--c-accent)] text-white rounded">Fechar</button>
         </div>
     </div>
     );

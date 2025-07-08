@@ -47,7 +47,7 @@ const CharPopup = ({ onSubmit, onClose, submitLabel = 'Confirmar' }) => {
                 {error && <span className="text-red-600 text-sm">{error}</span>}
                 <div className="flex justify-end gap-2">
                     <button type="button" onClick={onClose} className="px-3 py-1 border rounded">Cancelar</button>
-                    <button type="submit" disabled={loading} className="px-3 py-1 bg-[#A8C090] rounded">
+                    <button type="submit" disabled={loading} className="px-3 py-1 bg-[var(--c-accent-green)] rounded">
                         {loading ? 'Buscando...' : submitLabel}
                     </button>
                 </div>
