@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import UserProfileDropdown from './UserProfileDropdown';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 
 // Navigation links were moved to the user profile popup
 const navLinks = [];
@@ -9,6 +10,8 @@ const navLinks = [];
 const Header = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const desktopProfileRef = useRef(null);
+  const mobileProfileRef = useRef(null);
   const location = useLocation();
   const { user, login, logout } = useContext(AuthContext);
 
@@ -22,6 +25,13 @@ const Header = ({ children }) => {
     setProfileOpen(false);
     setMenuOpen(false);
   };
+
+  useOnClickOutside([desktopProfileRef, mobileProfileRef], () => setProfileOpen(false), profileOpen);
+
+  useEffect(() => {
+    setProfileOpen(false);
+  }, [location.pathname]);
+
 
   return (
     <header className="h-[70px] w-full border-b border-[#613C4C] bg-[#2B2C30] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between px-6">
@@ -45,7 +55,7 @@ const Header = ({ children }) => {
             </Link>
           ))}
           {user ? (
-            <div className="relative">
+            <div className="relative" ref={desktopProfileRef}>
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
                 className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
@@ -91,7 +101,7 @@ const Header = ({ children }) => {
               </Link>
             ))}
             {user ? (
-              <div className="relative">
+              <div className="relative" ref={mobileProfileRef}>
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
                   className="w-8 h-8 rounded-full bg-[#BF6370] text-white flex items-center justify-center font-bold"
