@@ -17,7 +17,7 @@ const NotificationCenter = () => {
           >
             ×
           </button>
-          <p className="mb-2 text-sm">
+          <p className="mb-2 text-sm text-black">
             O {n.applicant.name} solicitou uma vaga para o soulcore de {n.soulCoreName}.
           </p>
           <div className="flex gap-2 self-end">
