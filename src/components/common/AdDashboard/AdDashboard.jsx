@@ -60,7 +60,7 @@ const AdDashboard = () => {
                 />
 
             )}
-            <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-start min-h-screen content-start px-[50px]">
+            <div className="mt-12 flex flex-wrap gap-6 max-w-[1440px] m-auto justify-center min-h-screen content-start">
                 {activeAds.map(ad => (
                     <Card key={ad.id} adData={ad} />
                 ))}
