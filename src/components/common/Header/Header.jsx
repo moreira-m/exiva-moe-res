@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
 import UserProfileDropdown from './UserProfileDropdown';
 import useOutsideClick from '../../../hooks/useOutsideClick.js';
+import findFiend from './../../../assets/Find_Fiend.gif'
 
 // Navigation links were moved to the user profile popup
 const navLinks = [];
@@ -31,7 +32,9 @@ const Header = ({ children }) => {
     <header className="h-[70px] w-full border-b border-border-main bg-surface shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-between px-6">
       <div className='max-w-[1440px] flex items-center justify-between w-full m-auto'>
         <div className="flex items-center gap-4">
-          <Link to="/" className="text-white font-bold text-xl hover:text-border-main transition">
+          <img src={findFiend}>
+          </img>
+          <Link to="/" className="text-white font-bold text-xl hover:text-border-main transition hidden md:block">
             Exiva Moe Res
           </Link>
         </div>
